@@ -11,6 +11,7 @@
 		32E8D8EA28504A670083D517 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8E928504A670083D517 /* ContentView.swift */; };
 		32E8D8EC28504A680083D517 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EB28504A680083D517 /* Assets.xcassets */; };
 		32E8D8EF28504A680083D517 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EE28504A680083D517 /* Preview Assets.xcassets */; };
+		32E8D8F7285053210083D517 /* LoginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8F6285053210083D517 /* LoginScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		32E8D8E928504A670083D517 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		32E8D8EB28504A680083D517 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32E8D8EE28504A680083D517 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		32E8D8F6285053210083D517 /* LoginScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */,
 				32E8D8E928504A670083D517 /* ContentView.swift */,
+				32E8D8F52850530D0083D517 /* Scenes */,
 				32E8D8EB28504A680083D517 /* Assets.xcassets */,
 				32E8D8ED28504A680083D517 /* Preview Content */,
 			);
@@ -65,6 +68,14 @@
 				32E8D8EE28504A680083D517 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		32E8D8F52850530D0083D517 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				32E8D8F6285053210083D517 /* LoginScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32E8D8EA28504A670083D517 /* ContentView.swift in Sources */,
+				32E8D8F7285053210083D517 /* LoginScene.swift in Sources */,
 				32E8D8E828504A670083D517 /* CublaxSmartContractApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +287,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,6 +317,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
