@@ -92,10 +92,12 @@ extension LoginScene {
                     Button("Login",
                            action: viewModel.confirmSelection)
                     .foregroundColor(.black)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity, alignment: .center)
                 }.navigationBarTitle("Login")
-                
-            }
+            }.navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
