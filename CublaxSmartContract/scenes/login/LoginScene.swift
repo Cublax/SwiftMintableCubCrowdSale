@@ -21,8 +21,8 @@ extension LoginScene {
                         Toggle("Create New Account",
                                isOn: $viewModel.viewState.creatingAccount)
                         if !viewModel.viewState.creatingAccount {
-                            TextField("Public Key",
-                                      text: $viewModel.viewState.publicKey)
+                            TextField("Private Key",
+                                      text: $viewModel.viewState.privateKey)
                         }
                         SecureField("Enter password",
                                     text: $viewModel.viewState.password)
@@ -39,6 +39,14 @@ extension LoginScene {
                                 viewModel.updateNetwork(network: .rinkeby)
                             }
                         }
+                    }
+                    NavigationLink("Login") {
+                        TokenSaleScene.ContentView(viewModel: TokenSaleScene.TokenSaleSceneViewModel(
+                            network: viewModel.viewState.selectedNetwork,
+                            password: viewModel.viewState.password,
+                            privateKey: viewModel.viewState.privateKey
+                        )
+                        )
                     }
                     Button("Login",
                            action: viewModel.confirmSelection)

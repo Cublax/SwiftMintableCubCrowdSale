@@ -13,36 +13,36 @@ final class Web3Manager {
     var wallet: Wallet!
     var keystoreManager: KeystoreManager!
     var web3: web3!
-    let token: ERC20Token
-    let walletAddress: String
+    var token: ERC20Token!
     let cublaxTokenSaleAddress: String
     
-    init() {
-        walletAddress = "0x8c1f4e95Bf74165d987770AbB8ddc88BAC76E4c9"
+    init(network: Network, password: String, privateKey: String) {
         cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
-        token = ERC20Token(
+        token = initizalizeToken()
+        wallet = initializeWallet(password: password, privateKey: privateKey)
+        keystoreManager = getKeyStoreManager(walletData: wallet.data,
+                                             isWalletHD: wallet.isHD)
+        web3 = initializeweb3(network: network,
+                              keystoreManager: keystoreManager)
+    }
+    
+    private func initizalizeToken() -> ERC20Token {
+        return ERC20Token(
             name: "Cublax Token",
             address: "0xB55A30EA9F28D361655CA7C253D76e15C35BCAE5",
             decimals: "0",
             symbol: "Cub"
         )
-        wallet = initializeWallet()
-        keystoreManager = getKeyStoreManager()
-        web3 = initializeweb3()
-        getPrivateKey()
     }
     
-    private func initializeweb3() -> web3 {
-        let endpoint = "https://ropsten.infura.io/v3/b721b56d79b04a47aeaf08d18dbc3b2e"
-        let web3 = web3swift.web3(provider: Web3HttpProvider(URL(string: endpoint)!)!)
+    private func initializeweb3(network: Network, keystoreManager: KeystoreManager) -> web3 {
+        let web3 = web3swift.web3(provider: Web3HttpProvider(URL(string: network.endpoint())!)!)
         web3.addKeystoreManager(keystoreManager)
         return web3
     }
     
-    private func initializeWallet() -> Wallet? {
-        let password = "Ninik7474"
-        let key = "f67e3244100be4de079f73a586ccc1d5b1b69442dfb7db20178cd1f9f41d9483"
-        let formattedKey = key.trimmingCharacters(in: .whitespacesAndNewlines)
+    private func initializeWallet(password: String, privateKey: String) -> Wallet? {
+        let formattedKey = privateKey.trimmingCharacters(in: .whitespacesAndNewlines)
         let dataKey = Data.fromHex(formattedKey)!
         let name = "Account 1"
         do {
@@ -56,10 +56,10 @@ final class Web3Manager {
         }
     }
     
-    private func getKeyStoreManager() -> KeystoreManager {
-        let data = wallet.data
+    private func getKeyStoreManager(walletData: Data, isWalletHD: Bool) -> KeystoreManager {
+        let data = walletData
         let keystoreManager: KeystoreManager
-        if wallet.isHD {
+        if isWalletHD {
             let keystore = BIP32Keystore(data)!
             keystoreManager = KeystoreManager([keystore])
         } else {
@@ -67,17 +67,6 @@ final class Web3Manager {
             keystoreManager = KeystoreManager([keystore])
         }
         return keystoreManager
-    }
-    
-    private func getPrivateKey() {
-        let password = "Ninik7474"
-        let ethereumAddress = EthereumAddress(wallet.address)!
-        do {
-            let pkData = try keystoreManager.UNSAFE_getPrivateKeyData(password: password, account: ethereumAddress).toHexString()
-            print(pkData)
-        } catch {
-            print("Error: \(error)")
-        }
     }
     
     func getAccountBalance() -> String {

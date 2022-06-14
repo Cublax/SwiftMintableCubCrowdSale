@@ -11,7 +11,7 @@ extension LoginScene {
     struct ViewState {
         var creatingAccount = false
         var selectedNetwork: Network = .none
-        var publicKey = ""
+        var privateKey = ""
         var password = ""
         var error: Swift.Error?
     }
@@ -33,7 +33,7 @@ extension LoginScene {
                 )
             } else {
                 performLogin(
-                    publicKey: viewState.publicKey,
+                    publicKey: viewState.privateKey,
                     password: viewState.password
                 )
             }
