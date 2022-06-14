@@ -69,7 +69,7 @@ final class Web3Manager {
         return keystoreManager
     }
     
-    func getAccountBalance() -> String {
+    func getAccountBalance() async throws -> String {
         let walletAddress = EthereumAddress(wallet.address)! // Address which balance we want to know
         do {
             let balanceResult = try web3.eth.getBalance(address: walletAddress)
@@ -80,7 +80,7 @@ final class Web3Manager {
         }
     }
     
-    func getTokenBalance() -> String {
+    func getTokenBalance() async throws -> String {
         let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
         let exploredAddress = EthereumAddress(wallet.address)! // Address which balance we want to know. Here we used same wallet address
         let erc20ContractAddress = EthereumAddress(token.address)!

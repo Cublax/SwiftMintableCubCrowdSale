@@ -23,10 +23,15 @@ extension TokenSaleScene {
                         Text(viewModel.viewState.accountBalance)
                     }
                     HStack {
-                        Text("Total CubToken supply:").bold()
+                        Text("Total Token supply:").bold()
                         Spacer()
                         Text(viewModel.viewState.tokenBalance)
                     }
+                }
+            }.onAppear() {
+                Task {
+                    print("hello")
+                    await viewModel.getweb3values()
                 }
             }
         }
