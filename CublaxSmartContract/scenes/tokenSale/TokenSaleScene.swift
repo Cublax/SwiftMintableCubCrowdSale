@@ -16,9 +16,18 @@ extension TokenSaleScene {
         
         var body: some View {
             VStack(alignment: .leading) {
-                TextField("", text: $viewModel.viewState.accountBalance)
-                TextField("", text: $viewModel.viewState.tokenBalance)
-//                TextField("", text: $viewModel.viewState.totalTokenSupply)
+                Section {
+                    HStack {
+                        Text("Account Balance(ETH):").bold()
+                        Spacer()
+                        Text(viewModel.viewState.accountBalance)
+                    }
+                    HStack {
+                        Text("Total CubToken supply:").bold()
+                        Spacer()
+                        Text(viewModel.viewState.tokenBalance)
+                    }
+                }
             }
         }
     }
