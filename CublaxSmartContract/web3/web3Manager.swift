@@ -9,7 +9,7 @@ import Foundation
 import web3swift
 import BigInt
 
-final class Web3Manager {
+ class Web3Manager {
     var wallet: Wallet!
     var keystoreManager: KeystoreManager!
     var web3: web3!

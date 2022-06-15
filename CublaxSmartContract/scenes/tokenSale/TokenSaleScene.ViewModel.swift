@@ -16,7 +16,7 @@ extension TokenSaleScene {
 }
 
 extension TokenSaleScene {
-    final class TokenSaleSceneViewModel: ObservableObject {
+    @MainActor class TokenSaleSceneViewModel: ObservableObject {
         
         @Published var viewState = ViewState()
         private var web3Manager: Web3Manager
