@@ -16,7 +16,7 @@ import BigInt
     var token: ERC20Token!
     let cublaxTokenSaleAddress: String
     
-    init(network: Network, password: String, privateKey: String) {
+    init(network: Network, password: String, privateKey: String) async {
         cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
         token = initizalizeToken()
         wallet = initializeWallet(password: password, privateKey: privateKey)

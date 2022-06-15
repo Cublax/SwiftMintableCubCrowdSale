@@ -19,16 +19,20 @@ extension TokenSaleScene {
     @MainActor class TokenSaleSceneViewModel: ObservableObject {
         
         @Published var viewState = ViewState()
-        private var web3Manager: Web3Manager
+        private var web3Manager: Web3Manager!
         
         init(network: Network, password: String, privateKey: String) {
-            web3Manager = Web3Manager(network: network, password: password, privateKey: privateKey)
+            Task {
+                web3Manager = await Web3Manager(network: network, password: password, privateKey: privateKey)
+            }
         }
         
         func getweb3values() async {
+            print("VM getweb3values()")
             Task {
                 viewState.accountBalance = try await web3Manager.getAccountBalance()
                 viewState.tokenBalance = try await web3Manager.getTokenBalance()
+                print("inside getweb3values() end of Task")
             }
         }
         

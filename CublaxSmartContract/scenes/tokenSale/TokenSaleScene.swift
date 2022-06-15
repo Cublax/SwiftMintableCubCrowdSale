@@ -30,7 +30,6 @@ extension TokenSaleScene {
                 }
             }.onAppear() {
                 Task {
-                    print("hello")
                     await viewModel.getweb3values()
                 }
             }
