@@ -28,11 +28,9 @@ extension TokenSaleScene {
         }
         
         func getweb3values() async {
-            print("VM getweb3values()")
             Task {
                 viewState.accountBalance = try await web3Manager.getAccountBalance()
                 viewState.tokenBalance = try await web3Manager.getTokenBalance()
-                print("inside getweb3values() end of Task")
             }
         }
         
