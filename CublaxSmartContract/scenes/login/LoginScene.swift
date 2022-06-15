@@ -40,22 +40,24 @@ extension LoginScene {
                             }
                         }
                     }
-                    NavigationLink("Login") {
-                        TokenSaleScene.ContentView(viewModel: TokenSaleScene.TokenSaleSceneViewModel(
-                            network: viewModel.viewState.selectedNetwork,
-                            password: viewModel.viewState.password,
-                            privateKey: viewModel.viewState.privateKey
+                    NavigationLink {
+                        TokenSaleScene.ContentView(
+                            viewModel: TokenSaleScene.TokenSaleSceneViewModel(
+                                network: viewModel.viewState.selectedNetwork,
+                                password: viewModel.viewState.password,
+                                privateKey: viewModel.viewState.privateKey
+                            )
                         )
-                        )
+                    } label: {
+                        Text("Login")
+                            .foregroundColor(.black)
+                            .frame(minWidth: 0,
+                                   maxWidth: .infinity,
+                                   minHeight: 0,
+                                   maxHeight: .infinity,
+                                   alignment: .center)
+                        
                     }
-                    Button("Login",
-                           action: viewModel.confirmSelection)
-                    .foregroundColor(.black)
-                    .frame(minWidth: 0,
-                           maxWidth: .infinity,
-                           minHeight: 0,
-                           maxHeight: .infinity,
-                           alignment: .center)
                 }.navigationBarTitle("Login")
             }.navigationViewStyle(StackNavigationViewStyle())
         }

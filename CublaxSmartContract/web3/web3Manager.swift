@@ -9,17 +9,19 @@ import Foundation
 import web3swift
 import BigInt
 
- actor Web3Manager {
+actor Web3Manager {
     var wallet: Wallet!
     var keystoreManager: KeystoreManager!
     var web3: web3!
     var token: ERC20Token!
     let cublaxTokenSaleAddress: String
     
-    init(network: Network, password: String, privateKey: String) async {
+    init(network: Network, password: String, privateKey: String?) async {
         cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
         token = initizalizeToken()
-        wallet = initializeWallet(password: password, privateKey: privateKey)
+        if let privateKey = privateKey {
+            wallet = initializeWallet(password: password, privateKey: privateKey)
+        }
         keystoreManager = getKeyStoreManager(walletData: wallet.data,
                                              isWalletHD: wallet.isHD)
         web3 = initializeweb3(network: network,

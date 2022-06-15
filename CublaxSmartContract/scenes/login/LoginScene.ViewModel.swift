@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension LoginScene {
     struct ViewState {
@@ -21,29 +22,9 @@ extension LoginScene {
     final class LoginSceneViewModel: ObservableObject {
         
         @Published var viewState = ViewState.init()
-        
+
         func updateNetwork(network: Network) {
             self.viewState.selectedNetwork = network
-        }
-        
-        func confirmSelection() {
-            if viewState.creatingAccount {
-                createAccount(
-                    password: viewState.password
-                )
-            } else {
-                performLogin(
-                    publicKey: viewState.privateKey,
-                    password: viewState.password
-                )
-            }
-        }
-        
-        private func createAccount(password: String) {
-            
-        }
-        private func performLogin(publicKey: String, password: String) {
-            
         }
     }
 }
