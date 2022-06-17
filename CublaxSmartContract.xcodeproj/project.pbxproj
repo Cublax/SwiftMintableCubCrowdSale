@@ -7,37 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3245A77F28582BCB001F8820 /* TokenSaleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A77E28582BCB001F8820 /* TokenSaleScene.swift */; };
-		3245A78128582C6C001F8820 /* TokenSaleScene.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A78028582C6C001F8820 /* TokenSaleScene.ViewModel.swift */; };
+		3245A77F28582BCB001F8820 /* Scenes.TokenSale.Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */; };
+		3245A78128582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */; };
+		32984AA3285C26A300E4A3DF /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32984AA2285C26A300E4A3DF /* Scenes.swift */; };
+		32984AA5285C274900E4A3DF /* Scenes.Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32984AA4285C274900E4A3DF /* Scenes.Login.swift */; };
+		32984AA7285C27E600E4A3DF /* Scenes.TokenSale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32984AA6285C27E600E4A3DF /* Scenes.TokenSale.swift */; };
 		32A1B2FE2857082D00FBFA8F /* ERC20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A1B2FD2857082D00FBFA8F /* ERC20Token.swift */; };
 		32A1B3002857084200FBFA8F /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A1B2FF2857084200FBFA8F /* Wallet.swift */; };
 		32A1B3022857086E00FBFA8F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A1B3012857086E00FBFA8F /* Network.swift */; };
 		32A1B3052857094B00FBFA8F /* CubTokenCrowdSale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A1B3042857094B00FBFA8F /* CubTokenCrowdSale.swift */; };
-		32B4D16A2856D255006799D6 /* LoginScene.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4D1692856D255006799D6 /* LoginScene.ViewModel.swift */; };
+		32B4D16A2856D255006799D6 /* Scenes.Login.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4D1692856D255006799D6 /* Scenes.Login.ViewModel.swift */; };
 		32B4D16E2856D373006799D6 /* web3Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4D16D2856D373006799D6 /* web3Manager.swift */; };
 		32B4D1712856DAE8006799D6 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 32B4D1702856DAE8006799D6 /* web3swift */; };
 		32E8D8E828504A670083D517 /* CublaxSmartContractApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */; };
 		32E8D8EA28504A670083D517 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8E928504A670083D517 /* ContentView.swift */; };
 		32E8D8EC28504A680083D517 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EB28504A680083D517 /* Assets.xcassets */; };
 		32E8D8EF28504A680083D517 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EE28504A680083D517 /* Preview Assets.xcassets */; };
-		32E8D8F7285053210083D517 /* LoginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8F6285053210083D517 /* LoginScene.swift */; };
+		32E8D8F7285053210083D517 /* Scenes.Login.Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8F6285053210083D517 /* Scenes.Login.Views.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3245A77E28582BCB001F8820 /* TokenSaleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSaleScene.swift; sourceTree = "<group>"; };
-		3245A78028582C6C001F8820 /* TokenSaleScene.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSaleScene.ViewModel.swift; sourceTree = "<group>"; };
+		3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.Views.swift; sourceTree = "<group>"; };
+		3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.ViewModel.swift; sourceTree = "<group>"; };
+		32984AA2285C26A300E4A3DF /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
+		32984AA4285C274900E4A3DF /* Scenes.Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.Login.swift; sourceTree = "<group>"; };
+		32984AA6285C27E600E4A3DF /* Scenes.TokenSale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.swift; sourceTree = "<group>"; };
 		32A1B2FD2857082D00FBFA8F /* ERC20Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20Token.swift; sourceTree = "<group>"; };
 		32A1B2FF2857084200FBFA8F /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		32A1B3012857086E00FBFA8F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		32A1B3042857094B00FBFA8F /* CubTokenCrowdSale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubTokenCrowdSale.swift; sourceTree = "<group>"; };
-		32B4D1692856D255006799D6 /* LoginScene.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScene.ViewModel.swift; sourceTree = "<group>"; };
+		32B4D1692856D255006799D6 /* Scenes.Login.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.Login.ViewModel.swift; sourceTree = "<group>"; };
 		32B4D16D2856D373006799D6 /* web3Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = web3Manager.swift; sourceTree = "<group>"; };
 		32E8D8E428504A670083D517 /* CublaxSmartContract.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CublaxSmartContract.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CublaxSmartContractApp.swift; sourceTree = "<group>"; };
 		32E8D8E928504A670083D517 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		32E8D8EB28504A680083D517 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32E8D8EE28504A680083D517 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		32E8D8F6285053210083D517 /* LoginScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScene.swift; sourceTree = "<group>"; };
+		32E8D8F6285053210083D517 /* Scenes.Login.Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.Login.Views.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,20 +61,21 @@
 		3245A77D28582B98001F8820 /* tokenSale */ = {
 			isa = PBXGroup;
 			children = (
-				3245A77E28582BCB001F8820 /* TokenSaleScene.swift */,
-				3245A78028582C6C001F8820 /* TokenSaleScene.ViewModel.swift */,
+				32984AA6285C27E600E4A3DF /* Scenes.TokenSale.swift */,
+				3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */,
+				3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */,
 			);
 			path = tokenSale;
 			sourceTree = "<group>";
 		};
-		32A1B2FC2857081200FBFA8F /* model */ = {
+		32A1B2FC2857081200FBFA8F /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				32A1B2FD2857082D00FBFA8F /* ERC20Token.swift */,
 				32A1B2FF2857084200FBFA8F /* Wallet.swift */,
 				32A1B3012857086E00FBFA8F /* Network.swift */,
 			);
-			path = model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		32A1B3032857091500FBFA8F /* ABI */ = {
@@ -82,8 +89,9 @@
 		32B4D16B2856D259006799D6 /* login */ = {
 			isa = PBXGroup;
 			children = (
-				32B4D1692856D255006799D6 /* LoginScene.ViewModel.swift */,
-				32E8D8F6285053210083D517 /* LoginScene.swift */,
+				32984AA4285C274900E4A3DF /* Scenes.Login.swift */,
+				32B4D1692856D255006799D6 /* Scenes.Login.ViewModel.swift */,
+				32E8D8F6285053210083D517 /* Scenes.Login.Views.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -118,8 +126,8 @@
 				32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */,
 				32E8D8E928504A670083D517 /* ContentView.swift */,
 				32A1B3032857091500FBFA8F /* ABI */,
-				32A1B2FC2857081200FBFA8F /* model */,
-				32E8D8F52850530D0083D517 /* scenes */,
+				32A1B2FC2857081200FBFA8F /* Model */,
+				32E8D8F52850530D0083D517 /* Scenes */,
 				32B4D16C2856D33D006799D6 /* web3 */,
 				32E8D8EB28504A680083D517 /* Assets.xcassets */,
 				32E8D8ED28504A680083D517 /* Preview Content */,
@@ -135,13 +143,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		32E8D8F52850530D0083D517 /* scenes */ = {
+		32E8D8F52850530D0083D517 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				32984AA2285C26A300E4A3DF /* Scenes.swift */,
 				3245A77D28582B98001F8820 /* tokenSale */,
 				32B4D16B2856D259006799D6 /* login */,
 			);
-			path = scenes;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,14 +232,17 @@
 				32E8D8EA28504A670083D517 /* ContentView.swift in Sources */,
 				32A1B3002857084200FBFA8F /* Wallet.swift in Sources */,
 				32A1B3022857086E00FBFA8F /* Network.swift in Sources */,
-				32E8D8F7285053210083D517 /* LoginScene.swift in Sources */,
-				3245A78128582C6C001F8820 /* TokenSaleScene.ViewModel.swift in Sources */,
+				32E8D8F7285053210083D517 /* Scenes.Login.Views.swift in Sources */,
+				3245A78128582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift in Sources */,
 				32A1B2FE2857082D00FBFA8F /* ERC20Token.swift in Sources */,
 				32B4D16E2856D373006799D6 /* web3Manager.swift in Sources */,
-				32B4D16A2856D255006799D6 /* LoginScene.ViewModel.swift in Sources */,
+				32984AA5285C274900E4A3DF /* Scenes.Login.swift in Sources */,
+				32984AA7285C27E600E4A3DF /* Scenes.TokenSale.swift in Sources */,
+				32B4D16A2856D255006799D6 /* Scenes.Login.ViewModel.swift in Sources */,
+				32984AA3285C26A300E4A3DF /* Scenes.swift in Sources */,
 				32A1B3052857094B00FBFA8F /* CubTokenCrowdSale.swift in Sources */,
 				32E8D8E828504A670083D517 /* CublaxSmartContractApp.swift in Sources */,
-				3245A77F28582BCB001F8820 /* TokenSaleScene.swift in Sources */,
+				3245A77F28582BCB001F8820 /* Scenes.TokenSale.Views.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

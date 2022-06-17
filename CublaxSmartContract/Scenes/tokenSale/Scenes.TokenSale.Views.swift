@@ -8,9 +8,7 @@
 import SwiftUI
 import Combine
 
-public enum TokenSaleScene {}
-
-extension TokenSaleScene {
+extension Scenes.TokenSale {
     struct ContentView: View {
         @StateObject var viewModel: TokenSaleSceneViewModel
         
@@ -40,8 +38,8 @@ extension TokenSaleScene {
 
 struct TokenSaleScene_Previews: PreviewProvider {
     static var previews: some View {
-        TokenSaleScene.ContentView(
-            viewModel: TokenSaleScene.TokenSaleSceneViewModel(
+        Scenes.TokenSale.ContentView(
+            viewModel: Scenes.TokenSale.TokenSaleSceneViewModel(
                 network: .none,
                 password: "",
                 privateKey: ""

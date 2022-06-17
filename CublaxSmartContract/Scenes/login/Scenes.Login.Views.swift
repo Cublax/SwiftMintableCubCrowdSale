@@ -8,9 +8,8 @@
 import SwiftUI
 import Combine
 
-public enum LoginScene {}
 
-extension LoginScene {
+extension Scenes.Login {
     struct ContentView: View {
         @StateObject private var viewModel = LoginSceneViewModel()
         
@@ -41,8 +40,8 @@ extension LoginScene {
                         }
                     }
                     NavigationLink {
-                        TokenSaleScene.ContentView(
-                            viewModel: TokenSaleScene.TokenSaleSceneViewModel(
+                        Scenes.TokenSale.ContentView(
+                            viewModel: Scenes.TokenSale.TokenSaleSceneViewModel(
                                 network: viewModel.viewState.selectedNetwork,
                                 password: viewModel.viewState.password,
                                 privateKey: viewModel.viewState.privateKey
@@ -66,6 +65,6 @@ extension LoginScene {
 
 struct LoginScene_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScene.ContentView()
+        Scenes.Login.ContentView()
     }
 }

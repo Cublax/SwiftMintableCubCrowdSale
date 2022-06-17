@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension TokenSaleScene {
+extension Scenes.TokenSale {
     struct ViewState {
         var accountBalance = ""
         var totalTokenSupply = 0
@@ -15,7 +15,7 @@ extension TokenSaleScene {
     }
 }
 
-extension TokenSaleScene {
+extension Scenes.TokenSale {
     @MainActor class TokenSaleSceneViewModel: ObservableObject {
         
         @Published var viewState = ViewState()

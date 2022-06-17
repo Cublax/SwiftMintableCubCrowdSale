@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension LoginScene {
+extension Scenes.Login {
     struct ViewState {
         var creatingAccount = false
         var selectedNetwork: Network = .none
@@ -18,7 +18,7 @@ extension LoginScene {
     }
 }
 
-extension LoginScene {
+extension Scenes.Login {
     final class LoginSceneViewModel: ObservableObject {
         
         @Published var viewState = ViewState.init()
