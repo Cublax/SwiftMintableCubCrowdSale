@@ -40,7 +40,6 @@ struct TokenSaleScene_Previews: PreviewProvider {
     static var previews: some View {
         Scenes.TokenSale.ContentView(
             viewModel: Scenes.TokenSale.TokenSaleSceneViewModel(
-                network: .none,
                 password: "",
                 privateKey: ""
             )

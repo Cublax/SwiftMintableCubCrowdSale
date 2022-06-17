@@ -17,32 +17,14 @@ extension Scenes.Login {
             NavigationView {
                 Form {
                     Section {
-                        Toggle("Create New Account",
-                               isOn: $viewModel.viewState.creatingAccount)
-                        if !viewModel.viewState.creatingAccount {
                             TextField("Private Key",
                                       text: $viewModel.viewState.privateKey)
-                        }
                         SecureField("Enter password",
                                     text: $viewModel.viewState.password)
-                    }
-                    Section {
-                        Menu(viewModel.viewState.selectedNetwork.userTitle()) {
-                            Button("MainNet") {
-                                viewModel.updateNetwork(network: .mainNet)
-                            }
-                            Button("Ropsten") {
-                                viewModel.updateNetwork(network: .ropsten)
-                            }
-                            Button("Rinkeby") {
-                                viewModel.updateNetwork(network: .rinkeby)
-                            }
-                        }
                     }
                     NavigationLink {
                         Scenes.TokenSale.ContentView(
                             viewModel: Scenes.TokenSale.TokenSaleSceneViewModel(
-                                network: viewModel.viewState.selectedNetwork,
                                 password: viewModel.viewState.password,
                                 privateKey: viewModel.viewState.privateKey
                             )

@@ -16,7 +16,7 @@ actor Web3Manager {
     var token: ERC20Token!
     let cublaxTokenSaleAddress: String
     
-    init(network: Network, password: String, privateKey: String?) async {
+    init(password: String, privateKey: String?) async {
         cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
         token = initizalizeToken()
         if let privateKey = privateKey {
@@ -24,8 +24,7 @@ actor Web3Manager {
         }
         keystoreManager = getKeyStoreManager(walletData: wallet.data,
                                              isWalletHD: wallet.isHD)
-        web3 = initializeweb3(network: network,
-                              keystoreManager: keystoreManager)
+        web3 = initializeweb3(keystoreManager: keystoreManager)
     }
     
     private func initizalizeToken() -> ERC20Token {
@@ -37,8 +36,8 @@ actor Web3Manager {
         )
     }
     
-    private func initializeweb3(network: Network, keystoreManager: KeystoreManager) -> web3 {
-        let web3 = web3swift.web3(provider: Web3HttpProvider(URL(string: network.endpoint())!)!)
+    private func initializeweb3(keystoreManager: KeystoreManager) -> web3 {
+        let web3 = web3swift.web3(provider: Web3HttpProvider(URL(string: "https://ropsten.infura.io/v3/b721b56d79b04a47aeaf08d18dbc3b2e")!)!)
         web3.addKeystoreManager(keystoreManager)
         return web3
     }

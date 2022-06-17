@@ -21,9 +21,9 @@ extension Scenes.TokenSale {
         @Published var viewState = ViewState()
         private var web3Manager: Web3Manager!
         
-        init(network: Network, password: String, privateKey: String) {
+        init(password: String, privateKey: String) {
             Task {
-                web3Manager = await Web3Manager(network: network, password: password, privateKey: privateKey)
+                web3Manager = await Web3Manager(password: password, privateKey: privateKey)
             }
         }
         
