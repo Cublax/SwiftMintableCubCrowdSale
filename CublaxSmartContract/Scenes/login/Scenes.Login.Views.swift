@@ -8,45 +8,71 @@
 import SwiftUI
 import Combine
 
-
 extension Scenes.Login {
     struct ContentView: View {
+        let viewState: ViewState
+        let send: (_: Event) -> Void
+
+        @SwiftUI.State private var username = ""
+        @SwiftUI.State private var password = ""
+        
+        private enum Field: Int, Hashable {
+            case username, password
+        }
+        @FocusState private var focusedField: Field?
+        
+        var body: some View {
+            VStack {
+                Form {
+                    Section(header: Text("Credential")) {
+                        TextField("Name", text: $username)
+                            .focused($focusedField, equals: .username)
+                            .textContentType(.username)
+                            .keyboardType(.default)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                            .onAppear {
+                                username = viewState.privateKey
+                            }
+                        
+                        SecureField("Password", text: $password)
+                            .focused($focusedField, equals: .password)
+                            .textContentType(.password)
+                            .onAppear {
+                                password = viewState.password
+                            }
+                    }
+                }
+                Button("Sign-In") {
+                    focusedField = nil
+                    send(.intentSignIn(
+                        credential: .init(user: username, password: password, persistence: .none))
+                    )
+                }
+                //                .buttonStyle(.)
+                .padding()
+            }
+            .navigationBarTitle("Sign-In")
+        }
+    }
+}
+extension Scenes.Login {
+    struct ComponentView: View {
+        typealias ContentView = Scenes.Login.ContentView
         @StateObject private var viewModel = LoginSceneViewModel()
         
         var body: some View {
-            NavigationView {
-                Form {
-                    Section {
-                            TextField("Private Key",
-                                      text: $viewModel.viewState.privateKey)
-                        SecureField("Enter password",
-                                    text: $viewModel.viewState.password)
-                    }
-                    NavigationLink {
-                        Scenes.TokenSale.ContentView(
-                            viewModel: Scenes.TokenSale.TokenSaleSceneViewModel(
-                                password: viewModel.viewState.password,
-                                privateKey: viewModel.viewState.privateKey
-                            )
-                        )
-                    } label: {
-                        Text("Login")
-                            .foregroundColor(.black)
-                            .frame(minWidth: 0,
-                                   maxWidth: .infinity,
-                                   minHeight: 0,
-                                   maxHeight: .infinity,
-                                   alignment: .center)
-                        
-                    }
-                }.navigationBarTitle("Login")
-            }.navigationViewStyle(StackNavigationViewStyle())
+            ContentView(
+                viewState: viewModel.viewState,
+                send: viewModel.send)
         }
     }
 }
 
 struct LoginScene_Previews: PreviewProvider {
     static var previews: some View {
-        Scenes.Login.ContentView()
+        let state: Scenes.Login.ViewState = .init()
+        Scenes.Login.ContentView(viewState: state,
+                                 send: { _ in })
     }
 }

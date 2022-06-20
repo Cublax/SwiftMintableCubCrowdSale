@@ -25,16 +25,40 @@ extension Scenes.Login {
             send(.epsilon)
         }
         
-        func login() {
-            
+        struct Effect {
+            init(_ f: @escaping @Sendable () -> Void) {
+                self.f = f
+            }
+            private let f: () -> Void
+            func invoke() {
+                f()
+            }
         }
         
-        private func send(_ event: Event) {
+        func send(_ event: Event) {
             let (newInternalState, effects) = update(self.internalState, event: event)
             self.internalState = newInternalState
             self.viewState = transform(internalState: newInternalState)
             effects.forEach { effect in
                 effect.invoke()
+            }
+        }
+        
+        private func update(_ state: State, event: Event) -> (State, [Effect]) {
+            switch (state, event) {
+            case (.start, .epsilon):
+                return (.signInPrompt(
+                    credential: URLCredential(
+                        user: "f67e3244100be4de079f73a586ccc1d5b1b69442dfb7db20178cd1f9f41d9483",
+                        password: "Ninik7474",
+                        persistence: .none
+                    )
+                ), [Effect {
+                } ])
+                
+            default:
+                print("did not handle \(state) \(event)")
+                return (state,[])
             }
         }
         
