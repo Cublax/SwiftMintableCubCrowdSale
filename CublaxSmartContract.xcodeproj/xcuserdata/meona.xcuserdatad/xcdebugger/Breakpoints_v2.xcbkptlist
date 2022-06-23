@@ -14,8 +14,8 @@
             filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "update(_:event:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "update(_:event:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "update(_:event:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,13 +62,13 @@
             filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "update(_:event:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D57C6791-FF8F-452A-9AEF-4FE1189E0759 - 4837397c5e0871e1"
+                  uuid = "D57C6791-FF8F-452A-9AEF-4FE1189E0759 - 4837397c5e087098"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -78,12 +78,12 @@
                   urlString = "file:///Users/meona/Developer/CublaxSmartContract/CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
                   offsetFromSymbolStart = "142">
                </Location>
                <Location
-                  uuid = "D57C6791-FF8F-452A-9AEF-4FE1189E0759 - 73e57d8407b16e4d"
+                  uuid = "D57C6791-FF8F-452A-9AEF-4FE1189E0759 - 73e57d8407b16f34"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -93,8 +93,8 @@
                   urlString = "file:///Users/meona/Developer/CublaxSmartContract/CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
                   offsetFromSymbolStart = "71">
                </Location>
             </Locations>
@@ -110,8 +110,8 @@
             filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "update(_:event:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,9 +126,25 @@
             filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "update(_:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "72D138E7-50D5-47F7-A5D5-F4CB0862D250"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "init(store:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

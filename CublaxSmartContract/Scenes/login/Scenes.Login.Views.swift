@@ -56,27 +56,31 @@ extension Scenes.Login {
 struct LoginModifier: ViewModifier {
 
     let isPresented: Binding<Bool>
+    let store: Scenes.Login.Store
 
     func body(content: Content) -> some View {
         content
             .fullScreenCover(isPresented: isPresented) {
-                Scenes.Login.ComponentView()
+                Scenes.Login.ComponentView(store: store)
             }
             .navigationTitle("Sign-In")
     }
 }
 
 extension View {
-    func login(isPresented: Binding<Bool>) -> some View {
-        return modifier(LoginModifier(isPresented: isPresented))
+    func login(isPresented: Binding<Bool>, presenting store: Scenes.Login.Store) -> some View {
+        return modifier(LoginModifier(isPresented: isPresented, store: store))
     }
 }
 
 extension Scenes.Login {
     struct ComponentView: View {
         typealias ContentView = Scenes.Login.ContentView
-        @StateObject private var viewModel = LoginSceneViewModel()
+        @StateObject private var viewModel: LoginSceneViewModel
         
+        init(store: Store) {
+            _viewModel = StateObject(wrappedValue: LoginSceneViewModel(store: store))
+        }
         var body: some View {
             ContentView(
                 viewState: viewModel.viewState,

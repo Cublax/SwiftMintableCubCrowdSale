@@ -11,7 +11,7 @@ import SwiftUI
 struct CublaxSmartContractApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Scenes.Main.ComponentView()
         }
     }
 }

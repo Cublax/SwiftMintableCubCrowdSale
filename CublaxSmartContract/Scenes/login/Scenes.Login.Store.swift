@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Scenes.Login {
     
@@ -49,6 +50,17 @@ extension Scenes.Login {
             default:
                 return nil
             }
+        }
+    }
+    
+    final class Store: ObservableObject {
+        
+        @Published var state: State
+        @Published var event: Event
+        
+        init(state: State, event: Event) {
+            self.state = state
+            self.event = event
         }
     }
 }

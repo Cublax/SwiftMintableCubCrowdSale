@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 extension Scenes.Login {
     struct ViewState {
@@ -19,11 +20,19 @@ extension Scenes.Login {
 extension Scenes.Login {
     final class LoginSceneViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
-        private var internalState: State = .init()
+        @Published var internalState: State = .init()
         private var web3: Web3Manager!
         
-        init() {
+        let store: Store
+        private var cancellable: AnyCancellable?
+        
+        init(store: Store) {
+            self.store = store
+            cancellable = $internalState.sink(receiveValue: { state in
+                store.state = state
+            })
             send(.epsilon)
+            
         }
         
         struct Effect {

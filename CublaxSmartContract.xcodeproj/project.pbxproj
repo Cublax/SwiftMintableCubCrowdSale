@@ -21,7 +21,6 @@
 		32B4D16E2856D373006799D6 /* web3Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4D16D2856D373006799D6 /* web3Manager.swift */; };
 		32B4D1712856DAE8006799D6 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 32B4D1702856DAE8006799D6 /* web3swift */; };
 		32E8D8E828504A670083D517 /* CublaxSmartContractApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */; };
-		32E8D8EA28504A670083D517 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8E928504A670083D517 /* ContentView.swift */; };
 		32E8D8EC28504A680083D517 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EB28504A680083D517 /* Assets.xcassets */; };
 		32E8D8EF28504A680083D517 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EE28504A680083D517 /* Preview Assets.xcassets */; };
 		32E8D8F7285053210083D517 /* Scenes.Login.Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8F6285053210083D517 /* Scenes.Login.Views.swift */; };
@@ -42,7 +41,6 @@
 		32B4D16D2856D373006799D6 /* web3Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = web3Manager.swift; sourceTree = "<group>"; };
 		32E8D8E428504A670083D517 /* CublaxSmartContract.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CublaxSmartContract.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CublaxSmartContractApp.swift; sourceTree = "<group>"; };
-		32E8D8E928504A670083D517 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		32E8D8EB28504A680083D517 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32E8D8EE28504A680083D517 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		32E8D8F6285053210083D517 /* Scenes.Login.Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.Login.Views.swift; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */,
-				32E8D8E928504A670083D517 /* ContentView.swift */,
 				32A1B3032857091500FBFA8F /* ABI */,
 				32A1B2FC2857081200FBFA8F /* Model */,
 				32E8D8F52850530D0083D517 /* Scenes */,
@@ -240,7 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32E8D8EA28504A670083D517 /* ContentView.swift in Sources */,
 				32A1B3002857084200FBFA8F /* Wallet.swift in Sources */,
 				32E8D8F7285053210083D517 /* Scenes.Login.Views.swift in Sources */,
 				3245A78128582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift in Sources */,

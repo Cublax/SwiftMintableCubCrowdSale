@@ -23,11 +23,17 @@ extension Scenes.Main {
     enum Event {
         case loginEvent(Scenes.Login.Event)
     }
+    
+    static var appState = State()
+    static var loginStore = Scenes.Login.Store(state: appState.loginState,
+                                               event: .start)
 }
 
 extension Scenes.Main {
     
     struct ContentView: View {
+        
+        let loginStore: Scenes.Login.Store
         
         @SwiftUI.State private var isLoginPresented = true
         
@@ -36,17 +42,14 @@ extension Scenes.Main {
                 .tabItem {
                     Label("Patients", systemImage: "person.3")
                 }
-                .login(isPresented: $isLoginPresented)
-            //            .onReceive(loginStore) { loginStoreState in
-            //                switch loginStoreState {
-            //                case .signedIn:
-            //                    isLoginPresented = false
-            //                default:
-            //                    isLoginPresented = true
-            //                }
-            //            }
-                .onAppear {
-                    //                loginStore.send(.epsilon)
+                .login(isPresented: $isLoginPresented, presenting: loginStore)
+                .onReceive(loginStore.$state) { loginStoreState in
+                    switch loginStoreState {
+                    case .signedIn:
+                        isLoginPresented = false
+                    default:
+                        isLoginPresented = true
+                    }
                 }
         }
         
@@ -54,7 +57,7 @@ extension Scenes.Main {
     
     struct ComponentView: View {
         var body: some View {
-            Scenes.Main.ContentView()
+            Scenes.Main.ContentView(loginStore: loginStore)
         }
     }
 }
