@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32286B6428642F4900712CB5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32286B6328642F4900712CB5 /* MainView.swift */; };
 		3245A77F28582BCB001F8820 /* Scenes.TokenSale.Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */; };
 		3245A78128582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */; };
 		32984AA3285C26A300E4A3DF /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32984AA2285C26A300E4A3DF /* Scenes.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32286B6328642F4900712CB5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.Views.swift; sourceTree = "<group>"; };
 		3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.ViewModel.swift; sourceTree = "<group>"; };
 		32984AA2285C26A300E4A3DF /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32286B6228642F1F00712CB5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				32286B6328642F4900712CB5 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		3245A77D28582B98001F8820 /* tokenSale */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				32984AA2285C26A300E4A3DF /* Scenes.swift */,
+				32286B6228642F1F00712CB5 /* Main */,
 				3245A77D28582B98001F8820 /* tokenSale */,
 				32B4D16B2856D259006799D6 /* login */,
 			);
@@ -236,6 +247,7 @@
 				32A1B2FE2857082D00FBFA8F /* ERC20Token.swift in Sources */,
 				32B4D16E2856D373006799D6 /* web3Manager.swift in Sources */,
 				32984AA5285C274900E4A3DF /* Scenes.Login.swift in Sources */,
+				32286B6428642F4900712CB5 /* MainView.swift in Sources */,
 				32984AA7285C27E600E4A3DF /* Scenes.TokenSale.swift in Sources */,
 				32B4D16A2856D255006799D6 /* Scenes.Login.ViewModel.swift in Sources */,
 				32984AA3285C26A300E4A3DF /* Scenes.swift in Sources */,

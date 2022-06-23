@@ -50,6 +50,28 @@ extension Scenes.Login {
         }
     }
 }
+
+// MARK: - LoginModifier
+
+struct LoginModifier: ViewModifier {
+
+    let isPresented: Binding<Bool>
+
+    func body(content: Content) -> some View {
+        content
+            .fullScreenCover(isPresented: isPresented) {
+                Scenes.Login.ComponentView()
+            }
+            .navigationTitle("Sign-In")
+    }
+}
+
+extension View {
+    func login(isPresented: Binding<Bool>) -> some View {
+        return modifier(LoginModifier(isPresented: isPresented))
+    }
+}
+
 extension Scenes.Login {
     struct ComponentView: View {
         typealias ContentView = Scenes.Login.ContentView
