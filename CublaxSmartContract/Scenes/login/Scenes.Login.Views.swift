@@ -31,16 +31,10 @@ extension Scenes.Login {
                             .keyboardType(.default)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
-                            .onAppear {
-                                username = viewState.privateKey
-                            }
                         
                         SecureField("Password", text: $password)
                             .focused($focusedField, equals: .password)
                             .textContentType(.password)
-                            .onAppear {
-                                password = viewState.password
-                            }
                     }
                 }
                 Button("Sign-In") {

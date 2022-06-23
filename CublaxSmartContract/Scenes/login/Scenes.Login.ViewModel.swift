@@ -20,6 +20,7 @@ extension Scenes.Login {
     final class LoginSceneViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         private var internalState: State = .init()
+        private var web3: Web3Manager!
         
         init() {
             send(.epsilon)
@@ -47,14 +48,43 @@ extension Scenes.Login {
         private func update(_ state: State, event: Event) -> (State, [Effect]) {
             switch (state, event) {
             case (.start, .epsilon):
-                return (.signInPrompt(
-                    credential: URLCredential(
-                        user: "f67e3244100be4de079f73a586ccc1d5b1b69442dfb7db20178cd1f9f41d9483",
-                        password: "Ninik7474",
-                        persistence: .none
-                    )
-                ), [Effect {
-                } ])
+                return (
+                    .signInPrompt(
+                        credential: URLCredential(
+                            user: state.privateKey,
+                            password: state.password,
+                            persistence: .none
+                        )
+                    ), [Effect{
+                        self.send(.start)
+                    }])
+                
+            case (.signInPrompt(credential: let credentials), .start):
+                print(credentials)
+                viewState.privateKey = credentials.user ?? ""
+                viewState.password = credentials.password ?? ""
+                return (state,[])
+                
+            case (.signInPrompt(credential: _), .intentSignIn(credential: let credentials)):
+                return (.signingIn(credential: credentials), [Effect {
+                    Task {
+                        do {
+                            self.web3 = await Web3Manager(password: credentials.password!,
+                                                          privateKey: credentials.user)
+                            self.send(.signedIn)
+                        }
+                    }
+                }])
+                
+            case (.signingIn(credential: _), .signedIn):
+                print("Sign in success")
+                return (.signedIn,[Effect {
+                    self.send(.signedIn)
+                }])
+                
+            case (.signedIn, .signedIn):
+                print("Triger View Transition")
+                return (state,[])
                 
             default:
                 print("did not handle \(state) \(event)")

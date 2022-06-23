@@ -11,7 +11,9 @@ extension Scenes.Login {
     
     enum Event {
         case epsilon
+        case start
         case intentSignIn(credential: URLCredential)
+        case signedIn
     }
     
     enum State {

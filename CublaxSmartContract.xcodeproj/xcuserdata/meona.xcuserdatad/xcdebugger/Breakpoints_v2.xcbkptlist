@@ -3,4 +3,134 @@
    uuid = "2A48094C-3F2C-4AB4-B69C-4733922CFE38"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73C44874-DFE1-4386-BF4E-D3AC3424C361"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "update(_:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D9E0A3DD-8085-419C-9B7D-676105B5226C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "update(_:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "85B6DE8A-DE17-4A48-8D43-681E3E8CEEB5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "update(_:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D57C6791-FF8F-452A-9AEF-4FE1189E0759"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "update(_:event:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D57C6791-FF8F-452A-9AEF-4FE1189E0759 - 4837397c5e0871e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () async -&gt; () in closure #2 @Sendable () -&gt; () in CublaxSmartContract.Scenes.Login.LoginSceneViewModel.update(_: CublaxSmartContract.Scenes.Login.State, event: CublaxSmartContract.Scenes.Login.Event) -&gt; (CublaxSmartContract.Scenes.Login.State, Swift.Array&lt;CublaxSmartContract.Scenes.Login.LoginSceneViewModel.Effect&gt;)"
+                  moduleName = "CublaxSmartContract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/meona/Developer/CublaxSmartContract/CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "142">
+               </Location>
+               <Location
+                  uuid = "D57C6791-FF8F-452A-9AEF-4FE1189E0759 - 73e57d8407b16e4d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for closure #1 @Sendable () async -&gt; () in closure #2 @Sendable () -&gt; () in CublaxSmartContract.Scenes.Login.LoginSceneViewModel.update(_: CublaxSmartContract.Scenes.Login.State, event: CublaxSmartContract.Scenes.Login.Event) -&gt; (CublaxSmartContract.Scenes.Login.State, Swift.Array&lt;CublaxSmartContract.Scenes.Login.LoginSceneViewModel.Effect&gt;)"
+                  moduleName = "CublaxSmartContract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/meona/Developer/CublaxSmartContract/CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "71">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7DB4CBC8-CF49-4F10-958C-DFA45E296389"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "update(_:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C914195C-9336-440A-A418-D6D256738240"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "update(_:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
