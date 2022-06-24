@@ -39,9 +39,6 @@ extension Scenes.Main {
         
         var body: some View {
             DummyView()
-                .tabItem {
-                    Label("Patients", systemImage: "person.3")
-                }
                 .login(isPresented: $isLoginPresented, presenting: loginStore)
                 .onReceive(loginStore.$state) { loginStoreState in
                     switch loginStoreState {
@@ -52,7 +49,6 @@ extension Scenes.Main {
                     }
                 }
         }
-        
     }
     
     struct ComponentView: View {

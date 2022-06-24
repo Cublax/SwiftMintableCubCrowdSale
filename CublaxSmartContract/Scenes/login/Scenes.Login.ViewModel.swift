@@ -46,36 +46,35 @@ extension Scenes.Login {
         }
         
         func send(_ event: Event) {
-            let (newInternalState, effects) = update(self.internalState, event: event)
-            self.internalState = newInternalState
-            self.viewState = transform(internalState: newInternalState)
+            let effects = update(&internalState, event: event)
             effects.forEach { effect in
                 effect.invoke()
             }
         }
         
-        private func update(_ state: State, event: Event) -> (State, [Effect]) {
+        private func update(_ state: inout State, event: Event) -> [Effect] {
             switch (state, event) {
             case (.start, .epsilon):
-                return (
-                    .signInPrompt(
-                        credential: URLCredential(
-                            user: state.privateKey,
-                            password: state.password,
-                            persistence: .none
-                        )
-                    ), [Effect{
-                        self.send(.start)
-                    }])
+                state = .signInPrompt(
+                    credential: URLCredential(
+                        user: state.privateKey,
+                        password: state.password,
+                        persistence: .none
+                    ))
+                return [Effect{
+                    self.send(.start)
+                }]
                 
             case (.signInPrompt(credential: let credentials), .start):
                 print(credentials)
                 viewState.privateKey = credentials.user ?? ""
                 viewState.password = credentials.password ?? ""
-                return (state,[])
+                
+                return []
                 
             case (.signInPrompt(credential: _), .intentSignIn(credential: let credentials)):
-                return (.signingIn(credential: credentials), [Effect {
+                state = .signingIn(credential: credentials)
+                return [Effect {
                     Task {
                         do {
                             self.web3 = await Web3Manager(password: credentials.password!,
@@ -83,21 +82,22 @@ extension Scenes.Login {
                             self.send(.signedIn)
                         }
                     }
-                }])
+                }]
                 
             case (.signingIn(credential: _), .signedIn):
                 print("Sign in success")
-                return (.signedIn,[Effect {
+                state = .signedIn
+                return [Effect {
                     self.send(.signedIn)
-                }])
+                }]
                 
             case (.signedIn, .signedIn):
                 print("Triger View Transition")
-                return (state,[])
+                return []
                 
             default:
                 print("did not handle \(state) \(event)")
-                return (state,[])
+                return []
             }
         }
         
