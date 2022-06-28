@@ -59,7 +59,13 @@ extension Scenes.TokenSale {
         
         private func update(_ state: inout State, event: Event) -> [Effect] {
             switch (state, event) {
-            case (.start, .viewAppear):
+            case (.placeHolder, .epsilon):
+                print("hello")
+                return []
+                
+            case (.placeHolder, .logedIn):
+                print("hello")
+                state = .fetchingValues
                 return []
                 
             default:

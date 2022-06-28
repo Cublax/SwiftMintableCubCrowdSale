@@ -11,22 +11,21 @@ extension Scenes.TokenSale {
     
     enum Event {
         case epsilon
-        case viewAppear
         case logedIn
         case valuesFetched
     }
     
     enum State {
-        case start
+        case placeHolder
         case fetchingValues
         case valuesFetched
         
         init() {
-            self = .start
+            self = .placeHolder
         }
         var accountBalance: String {
             switch self {
-            case .start:
+            case .placeHolder:
                 return "0"
             default:
                 return ""
@@ -35,7 +34,7 @@ extension Scenes.TokenSale {
         
         var totalTokenSupply: Int {
             switch self {
-            case .start:
+            case .placeHolder:
                 return 0
             default:
                 return 0
@@ -44,7 +43,7 @@ extension Scenes.TokenSale {
         
         var tokenBalance: String {
             switch self {
-            case .start:
+            case .placeHolder:
                 return "0"
             default:
                 return ""

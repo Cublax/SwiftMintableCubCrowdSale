@@ -18,7 +18,7 @@ extension Scenes.Main {
         
         init() {
             self.loginState = .start
-            self.tokenSaleState = .start
+            self.tokenSaleState = .placeHolder
         }
     }
     
