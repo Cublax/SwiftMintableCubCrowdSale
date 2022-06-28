@@ -47,6 +47,7 @@ extension Scenes.Login {
         
         func send(_ event: Event) {
             let effects = update(&internalState, event: event)
+            self.viewState = transform(internalState: internalState)
             effects.forEach { effect in
                 effect.invoke()
             }
