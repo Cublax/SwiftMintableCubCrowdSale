@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3223243E286B1043002FC01C /* Scenes.TokenSale.Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3223243D286B1043002FC01C /* Scenes.TokenSale.Store.swift */; };
 		32286B6428642F4900712CB5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32286B6328642F4900712CB5 /* MainView.swift */; };
 		3245A77F28582BCB001F8820 /* Scenes.TokenSale.Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */; };
 		3245A78128582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3223243D286B1043002FC01C /* Scenes.TokenSale.Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.Store.swift; sourceTree = "<group>"; };
 		32286B6328642F4900712CB5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.Views.swift; sourceTree = "<group>"; };
 		3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.ViewModel.swift; sourceTree = "<group>"; };
@@ -70,8 +72,9 @@
 			isa = PBXGroup;
 			children = (
 				32984AA6285C27E600E4A3DF /* Scenes.TokenSale.swift */,
-				3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */,
+				3223243D286B1043002FC01C /* Scenes.TokenSale.Store.swift */,
 				3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */,
+				3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */,
 			);
 			path = tokenSale;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				32E8D8E828504A670083D517 /* CublaxSmartContractApp.swift in Sources */,
 				32984AA9285C2F0800E4A3DF /* Scenes.Login.Store.swift in Sources */,
 				3245A77F28582BCB001F8820 /* Scenes.TokenSale.Views.swift in Sources */,
+				3223243E286B1043002FC01C /* Scenes.TokenSale.Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

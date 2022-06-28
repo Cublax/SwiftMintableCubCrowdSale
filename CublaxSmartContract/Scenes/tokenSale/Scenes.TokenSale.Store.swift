@@ -1,44 +1,51 @@
 //
-//  Scenes.Login.Store.swift
+//  Scenes.TokenSale.Store.swift
 //  CublaxSmartContract
 //
-//  Created by Meona on 17.06.22.
+//  Created by Meona on 28.06.22.
 //
 
 import Foundation
 
-extension Scenes.Login {
+extension Scenes.TokenSale {
     
     enum Event {
         case epsilon
-        case start
-        case intentSignIn(credential: URLCredential)
-        case signedIn
+        case viewAppear
+        case logedIn
+        case valuesFetched
     }
     
     enum State {
         case start
-        case signInPrompt(credential: URLCredential)
-        case signingIn(credential: URLCredential)
-        case signedIn
+        case fetchingValues
+        case valuesFetched
         
         init() {
             self = .start
         }
-        
-        var privateKey: String {
+        var accountBalance: String {
             switch self {
             case .start:
-                return "f67e3244100be4de079f73a586ccc1d5b1b69442dfb7db20178cd1f9f41d9483"
+                return "0"
             default:
                 return ""
             }
         }
         
-        var password: String {
+        var totalTokenSupply: Int {
             switch self {
             case .start:
-                return "Ninik7474"
+                return 0
+            default:
+                return 0
+            }
+        }
+        
+        var tokenBalance: String {
+            switch self {
+            case .start:
+                return "0"
             default:
                 return ""
             }

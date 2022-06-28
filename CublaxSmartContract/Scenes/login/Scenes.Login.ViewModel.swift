@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 import Combine
 
 extension Scenes.Login {
@@ -18,7 +17,7 @@ extension Scenes.Login {
 }
 
 extension Scenes.Login {
-    final class LoginSceneViewModel: ObservableObject {
+    final class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         @Published var internalState: State = .init()
         private var web3: Web3Manager!

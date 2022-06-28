@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 extension Scenes.TokenSale {
     struct ViewState {
@@ -16,22 +17,63 @@ extension Scenes.TokenSale {
 }
 
 extension Scenes.TokenSale {
-    @MainActor class TokenSaleSceneViewModel: ObservableObject {
+    @MainActor class ViewModel: ObservableObject {
+        @Published var viewState = ViewState.init()
+        @Published var internalState: State = .init()
+        private var web3: Web3Manager!
         
-        @Published var viewState = ViewState()
-        private var web3Manager: Web3Manager!
+        let store: Store
+        private var cancellable: AnyCancellable?
         
-        init(password: String, privateKey: String) {
-            Task {
-                web3Manager = await Web3Manager(password: password, privateKey: privateKey)
-            }
+        init(store: Store) {
+            self.store = store
+            cancellable = $internalState.sink(receiveValue: { state in
+                store.state = state
+            })
         }
         
         func getweb3values() async {
             Task {
-                viewState.accountBalance = try await web3Manager.getAccountBalance()
-                viewState.tokenBalance = try await web3Manager.getTokenBalance()
+                // viewState.accountBalance = try await web3Manager.getAccountBalance()
+                // viewState.tokenBalance = try await web3Manager.getTokenBalance()
             }
+        }
+        
+        struct Effect {
+            init(_ f: @escaping @Sendable () -> Void) {
+                self.f = f
+            }
+            private let f: () -> Void
+            func invoke() {
+                f()
+            }
+        }
+        
+        func send(_ event: Event) {
+            let effects = update(&internalState, event: event)
+            self.viewState = transform(internalState: internalState)
+            effects.forEach { effect in
+                effect.invoke()
+            }
+        }
+        
+        private func update(_ state: inout State, event: Event) -> [Effect] {
+            switch (state, event) {
+            case (.start, .viewAppear):
+                return []
+                
+            default:
+                print("did not handle \(state) \(event)")
+                return []
+            }
+        }
+        
+        private func transform(internalState: State) -> ViewState {
+            ViewState.init(
+                accountBalance: internalState.accountBalance,
+                totalTokenSupply: internalState.totalTokenSupply,
+                tokenBalance: internalState.tokenBalance
+            )
         }
         
     }

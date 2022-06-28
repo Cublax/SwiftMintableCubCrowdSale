@@ -12,7 +12,7 @@ extension Scenes.Login {
     struct ContentView: View {
         let viewState: ViewState
         let send: (_: Event) -> Void
-
+        
         @SwiftUI.State private var username = ""
         @SwiftUI.State private var password = ""
         
@@ -54,10 +54,10 @@ extension Scenes.Login {
 // MARK: - LoginModifier
 
 struct LoginModifier: ViewModifier {
-
+    
     let isPresented: Binding<Bool>
     let store: Scenes.Login.Store
-
+    
     func body(content: Content) -> some View {
         content
             .fullScreenCover(isPresented: isPresented) {
@@ -76,10 +76,10 @@ extension View {
 extension Scenes.Login {
     struct ComponentView: View {
         typealias ContentView = Scenes.Login.ContentView
-        @StateObject private var viewModel: LoginSceneViewModel
+        @StateObject private var viewModel: ViewModel
         
         init(store: Store) {
-            _viewModel = StateObject(wrappedValue: LoginSceneViewModel(store: store))
+            _viewModel = StateObject(wrappedValue: ViewModel(store: store))
         }
         var body: some View {
             ContentView(
