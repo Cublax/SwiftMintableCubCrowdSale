@@ -19,17 +19,19 @@ extension Scenes.TokenSale {
 extension Scenes.TokenSale {
     @MainActor class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
-        @Published var internalState: State = .init()
-        private var web3: Web3Manager!
         
-        let store: OldStore
+        let store: Scenes.TokenSale.TokenSaleStore
         private var cancellable: AnyCancellable?
         
-        init(store: OldStore) {
+        init(store: Scenes.TokenSale.TokenSaleStore) {
             self.store = store
-            cancellable = $internalState.sink(receiveValue: { state in
-                store.state = state
+            cancellable = store.$state.sink(receiveValue: { output in
+                self.viewState = self.view(output)
             })
+        }
+        
+        func send(_ event: Event) {
+            store.send(event)
         }
         
         func getweb3values() async {
@@ -39,48 +41,15 @@ extension Scenes.TokenSale {
             }
         }
         
-        struct Effect {
-            init(_ f: @escaping @Sendable () -> Void) {
-                self.f = f
-            }
-            private let f: () -> Void
-            func invoke() {
-                f()
-            }
-        }
-        
-        func send(_ event: Event) {
-            let effects = update(&internalState, event: event)
-            self.viewState = transform(internalState: internalState)
-            effects.forEach { effect in
-                effect.invoke()
+        func view(_ output: State) -> ViewState {
+            switch output {
+            case .placeHolder:
+                return .init()
+            case .fetchingValues:
+                return .init(accountBalance: "it works", totalTokenSupply: 111, tokenBalance: "couille")
+            case .valuesFetched:
+                return .init()
             }
         }
-        
-        private func update(_ state: inout State, event: Event) -> [Effect] {
-            switch (state, event) {
-            case (.placeHolder, .epsilon):
-                print("hello")
-                return []
-                
-            case (.placeHolder, .logedIn):
-                print("hello")
-                state = .fetchingValues
-                return []
-                
-            default:
-                print("did not handle \(state) \(event)")
-                return []
-            }
-        }
-        
-        private func transform(internalState: State) -> ViewState {
-            ViewState.init(
-                accountBalance: internalState.accountBalance,
-                totalTokenSupply: internalState.totalTokenSupply,
-                tokenBalance: internalState.tokenBalance
-            )
-        }
-        
     }
 }

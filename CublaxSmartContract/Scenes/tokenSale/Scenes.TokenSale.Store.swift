@@ -59,17 +59,6 @@ extension Scenes.TokenSale {
         }
     }
     
-    final class OldStore: ObservableObject {
-        
-        @Published var state: State
-        @Published var event: Event
-        
-        init(state: State, event: Event) {
-            self.state = state
-            self.event = event
-        }
-    }
-    
     static func tokenSaleReducer(
         state: inout State,
         event: Event,
@@ -77,9 +66,11 @@ extension Scenes.TokenSale {
     ) -> AnyPublisher<Event, Never> {
         switch event {
         case .epsilon:
-            break
+            state = .placeHolder
         case .logedIn:
-            break
+            state = .fetchingValues
+//            return Just(Event.logedIn).eraseToAnyPublisher()
+
         case .valuesFetched:
             break
         }
