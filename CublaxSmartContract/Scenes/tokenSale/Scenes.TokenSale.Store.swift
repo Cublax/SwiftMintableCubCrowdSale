@@ -70,11 +70,7 @@ extension Scenes.TokenSale {
         }
     }
     
-    struct World {
-        var service: Web3Manager
-    }
-    
-    func tokenSaleReducer(
+    static func tokenSaleReducer(
         state: inout State,
         event: Event,
         environment: World
@@ -90,5 +86,7 @@ extension Scenes.TokenSale {
         return Empty().eraseToAnyPublisher()
     }
     
-    typealias AppStore = Store<State, Event, World>
+    typealias World = Scenes.Main.World
+    typealias TokenSaleStore = Store<State, Event, World>
 }
+

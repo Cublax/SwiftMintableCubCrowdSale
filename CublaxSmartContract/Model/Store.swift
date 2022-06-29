@@ -39,5 +39,3 @@ final class Store<State, Action, Environment>: ObservableObject {
             .store(in: &effectCancellables)
     }
 }
-
-

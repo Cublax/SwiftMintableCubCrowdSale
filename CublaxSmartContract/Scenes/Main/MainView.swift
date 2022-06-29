@@ -11,6 +11,12 @@ import Combine
 extension Scenes { enum Main {} }
 
 extension Scenes.Main {
+    struct World {
+        var service: Web3Manager!
+    }
+}
+
+extension Scenes.Main {
     
     struct State {
         var loginState: Scenes.Login.State
@@ -29,8 +35,15 @@ extension Scenes.Main {
     static var appState = State()
     static var loginStore = Scenes.Login.Store(state: appState.loginState,
                                                event: .epsilon)
-    static var tokenSaleStore = Scenes.TokenSale.OldStore(state: appState.tokenSaleState,
-                                                       event: .epsilon)
+    static var oldTokenSaleStore = Scenes.TokenSale.OldStore(state: appState.tokenSaleState,
+                                                             event: .epsilon)
+    
+    static let tokenSaleReducer = Scenes.TokenSale.tokenSaleReducer(state:event:environment:)
+    static let tokenSaleStore = Scenes.TokenSale.TokenSaleStore(
+        initialState: .init(),
+        reducer: tokenSaleReducer,
+        environment: World()
+    )
 }
 
 extension Scenes.Main {
@@ -59,7 +72,7 @@ extension Scenes.Main {
     struct ComponentView: View {
         var body: some View {
             Scenes.Main.ContentView(loginStore: loginStore,
-                                    tokenSaleStore: tokenSaleStore)
+                                    tokenSaleStore: oldTokenSaleStore)
         }
     }
 }
