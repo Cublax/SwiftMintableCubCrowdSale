@@ -12,7 +12,7 @@ extension Scenes { enum Main {} }
 
 extension Scenes.Main {
     struct World {
-        var service: Web3Manager!
+        var service = Web3Manager()
     }
 }
 
@@ -21,6 +21,7 @@ extension Scenes.Main {
     struct State {
         var loginState: Scenes.Login.State
         var tokenSaleState: Scenes.TokenSale.State
+        
         
         init() {
             self.loginState = .start
@@ -33,6 +34,7 @@ extension Scenes.Main {
     }
     
     static var appState = State()
+    static var world = World()
     static var loginStore = Scenes.Login.Store(state: appState.loginState,
                                                event: .epsilon)
     
@@ -40,7 +42,7 @@ extension Scenes.Main {
     static let tokenSaleStore = Scenes.TokenSale.TokenSaleStore(
         initialState: .init(),
         reducer: tokenSaleReducer,
-        environment: World()
+        environment: world
     )
 }
 

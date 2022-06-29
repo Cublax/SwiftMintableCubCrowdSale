@@ -77,8 +77,8 @@ extension Scenes.Login {
                 return [Effect {
                     Task {
                         do {
-                            self.web3 = await Web3Manager(password: credentials.password!,
-                                                          privateKey: credentials.user)
+                            await self.web3.setup(password: credentials.password!,
+                                             privateKey: credentials.user)
                             self.send(.signedIn)
                         }
                     }

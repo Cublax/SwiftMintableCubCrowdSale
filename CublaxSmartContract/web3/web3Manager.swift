@@ -16,9 +16,12 @@ actor Web3Manager {
     var token: ERC20Token!
     let cublaxTokenSaleAddress: String
     
-    init(password: String, privateKey: String?) async {
+    init() {
         cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
         token = initizalizeToken()
+    }
+    
+    func setup(password: String, privateKey: String?) async {
         if let privateKey = privateKey {
             wallet = initializeWallet(password: password, privateKey: privateKey)
         }

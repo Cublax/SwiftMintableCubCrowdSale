@@ -67,6 +67,7 @@ extension Scenes.TokenSale {
         switch event {
         case .epsilon:
             state = .placeHolder
+            
         case .logedIn:
             state = .fetchingValues
 //            return Just(Event.logedIn).eraseToAnyPublisher()
