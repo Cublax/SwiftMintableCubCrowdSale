@@ -22,10 +22,10 @@ extension Scenes.TokenSale {
         @Published var internalState: State = .init()
         private var web3: Web3Manager!
         
-        let store: Store
+        let store: OldStore
         private var cancellable: AnyCancellable?
         
-        init(store: Store) {
+        init(store: OldStore) {
             self.store = store
             cancellable = $internalState.sink(receiveValue: { state in
                 store.state = state

@@ -32,7 +32,7 @@ extension Scenes.TokenSale {
         typealias ContentView = Scenes.TokenSale.ContentView
         @StateObject private var viewModel: ViewModel
         
-        init(store: Store) {
+        init(store: OldStore) {
             _viewModel = StateObject(wrappedValue: ViewModel(store: store))
         }
         

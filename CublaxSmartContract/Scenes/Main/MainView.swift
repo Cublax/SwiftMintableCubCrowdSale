@@ -29,7 +29,7 @@ extension Scenes.Main {
     static var appState = State()
     static var loginStore = Scenes.Login.Store(state: appState.loginState,
                                                event: .epsilon)
-    static var tokenSaleStore = Scenes.TokenSale.Store(state: appState.tokenSaleState,
+    static var tokenSaleStore = Scenes.TokenSale.OldStore(state: appState.tokenSaleState,
                                                        event: .epsilon)
 }
 
@@ -38,7 +38,7 @@ extension Scenes.Main {
     struct ContentView: View {
         
         let loginStore: Scenes.Login.Store
-        let tokenSaleStore: Scenes.TokenSale.Store
+        let tokenSaleStore: Scenes.TokenSale.OldStore
         
         @SwiftUI.State private var isLoginPresented = true
         

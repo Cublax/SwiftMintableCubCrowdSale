@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 extension Scenes.TokenSale {
     
@@ -58,7 +59,7 @@ extension Scenes.TokenSale {
         }
     }
     
-    final class Store: ObservableObject {
+    final class OldStore: ObservableObject {
         
         @Published var state: State
         @Published var event: Event
@@ -68,4 +69,26 @@ extension Scenes.TokenSale {
             self.event = event
         }
     }
+    
+    struct World {
+        var service: Web3Manager
+    }
+    
+    func tokenSaleReducer(
+        state: inout State,
+        event: Event,
+        environment: World
+    ) -> AnyPublisher<Event, Never> {
+        switch event {
+        case .epsilon:
+            break
+        case .logedIn:
+            break
+        case .valuesFetched:
+            break
+        }
+        return Empty().eraseToAnyPublisher()
+    }
+    
+    typealias AppStore = Store<State, Event, World>
 }

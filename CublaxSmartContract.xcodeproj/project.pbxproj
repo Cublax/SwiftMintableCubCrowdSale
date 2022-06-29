@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3223243E286B1043002FC01C /* Scenes.TokenSale.Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3223243D286B1043002FC01C /* Scenes.TokenSale.Store.swift */; };
+		32232440286BDC77002FC01C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3223243F286BDC77002FC01C /* Store.swift */; };
 		32286B6428642F4900712CB5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32286B6328642F4900712CB5 /* MainView.swift */; };
 		3245A77F28582BCB001F8820 /* Scenes.TokenSale.Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */; };
 		3245A78128582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		3223243D286B1043002FC01C /* Scenes.TokenSale.Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.Store.swift; sourceTree = "<group>"; };
+		3223243F286BDC77002FC01C /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		32286B6328642F4900712CB5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.Views.swift; sourceTree = "<group>"; };
 		3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.TokenSale.ViewModel.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				32A1B2FD2857082D00FBFA8F /* ERC20Token.swift */,
+				3223243F286BDC77002FC01C /* Store.swift */,
 				32A1B2FF2857084200FBFA8F /* Wallet.swift */,
 			);
 			path = Model;
@@ -243,6 +246,7 @@
 				32A1B3002857084200FBFA8F /* Wallet.swift in Sources */,
 				32E8D8F7285053210083D517 /* Scenes.Login.Views.swift in Sources */,
 				3245A78128582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift in Sources */,
+				32232440286BDC77002FC01C /* Store.swift in Sources */,
 				32A1B2FE2857082D00FBFA8F /* ERC20Token.swift in Sources */,
 				32B4D16E2856D373006799D6 /* web3Manager.swift in Sources */,
 				32984AA5285C274900E4A3DF /* Scenes.Login.swift in Sources */,
