@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 extension Scenes.Login {
     
@@ -52,7 +53,7 @@ extension Scenes.Login {
         }
     }
     
-    final class Store: ObservableObject {
+    final class OldStore: ObservableObject {
         
         @Published var state: State
         @Published var event: Event
@@ -62,4 +63,25 @@ extension Scenes.Login {
             self.event = event
         }
     }
+    
+    static func loginReducer(
+        state: inout State,
+        event: Event,
+        environment: World
+    ) -> AnyPublisher<Event, Never> {
+        switch event {
+        case .epsilon:
+            break
+        case .start:
+            break
+        case .intentSignIn(credential: let credential):
+            break
+        case .signedIn:
+            break
+        }
+        return Empty().eraseToAnyPublisher()
+    }
+    
+    typealias World = Scenes.Main.World
+    typealias LoginStore = Store<State, Event, World>
 }

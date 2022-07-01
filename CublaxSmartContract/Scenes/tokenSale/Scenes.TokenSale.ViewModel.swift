@@ -17,7 +17,7 @@ extension Scenes.TokenSale {
 }
 
 extension Scenes.TokenSale {
-    @MainActor class ViewModel: ObservableObject {
+    final class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         
         let store: Scenes.TokenSale.TokenSaleStore
@@ -41,7 +41,7 @@ extension Scenes.TokenSale {
             }
         }
         
-        func view(_ output: State) -> ViewState {
+        private func view(_ output: State) -> ViewState {
             switch output {
             case .placeHolder:
                 return .init()

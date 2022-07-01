@@ -35,10 +35,15 @@ extension Scenes.Main {
     
     static var appState = State()
     static var world = World()
-    static var loginStore = Scenes.Login.Store(state: appState.loginState,
-                                               event: .epsilon)
     
+    static let loginReducer = Scenes.Login.loginReducer(state:event:environment:)
     static let tokenSaleReducer = Scenes.TokenSale.tokenSaleReducer(state:event:environment:)
+    
+    static var loginStore = Scenes.Login.LoginStore(
+        initialState: .init(),
+        reducer: loginReducer,
+        environment: world
+    )
     static let tokenSaleStore = Scenes.TokenSale.TokenSaleStore(
         initialState: .init(),
         reducer: tokenSaleReducer,
@@ -50,7 +55,7 @@ extension Scenes.Main {
     
     struct ContentView: View {
         
-        let loginStore: Scenes.Login.Store
+        let loginStore: Scenes.Login.LoginStore
         let tokenSaleStore: Scenes.TokenSale.TokenSaleStore
         
         @SwiftUI.State private var isLoginPresented = true

@@ -56,7 +56,7 @@ extension Scenes.Login {
 struct LoginModifier: ViewModifier {
     
     let isPresented: Binding<Bool>
-    let store: Scenes.Login.Store
+    let store: Scenes.Login.LoginStore
     
     func body(content: Content) -> some View {
         content
@@ -68,7 +68,7 @@ struct LoginModifier: ViewModifier {
 }
 
 extension View {
-    func login(isPresented: Binding<Bool>, presenting store: Scenes.Login.Store) -> some View {
+    func login(isPresented: Binding<Bool>, presenting store: Scenes.Login.LoginStore) -> some View {
         return modifier(LoginModifier(isPresented: isPresented, store: store))
     }
 }
@@ -78,7 +78,7 @@ extension Scenes.Login {
         typealias ContentView = Scenes.Login.ContentView
         @StateObject private var viewModel: ViewModel
         
-        init(store: Store) {
+        init(store: LoginStore) {
             _viewModel = StateObject(wrappedValue: ViewModel(store: store))
         }
         var body: some View {
