@@ -11,57 +11,44 @@ import Combine
 extension Scenes.Login {
     
     enum Event {
+        
         case epsilon
-        case start
+        
+        // Intents, sent from the UI
         case intentSignIn(credential: URLCredential)
+        case intentDismissError
+        
+        // Effect Outputs
+        case start(contextCredential: URLCredential)
         case signedIn
+        case signinError(error: Swift.Error)
     }
     
     enum State {
         case start
-        case signInPrompt(credential: URLCredential)
-        case signingIn(credential: URLCredential)
+        case readingContext
+        case signInPrompt(withContext: URLCredential?)
+        case signingIn
+        case signinFailure(Swift.Error)
         case signedIn
-        
-        init() {
-            self = .start
-        }
-        
-        var privateKey: String {
-            switch self {
-            case .start:
-                return "f67e3244100be4de079f73a586ccc1d5b1b69442dfb7db20178cd1f9f41d9483"
-            default:
-                return ""
-            }
-        }
-        
-        var password: String {
-            switch self {
-            case .start:
-                return "Ninik7474"
-            default:
-                return ""
-            }
-        }
-        
-        var error: Swift.Error? {
-            switch self {
-            default:
-                return nil
-            }
-        }
     }
     
-    final class OldStore: ObservableObject {
-        
-        @Published var state: State
-        @Published var event: Event
-        
-        init(state: State, event: Event) {
-            self.state = state
-            self.event = event
-        }
+    static func readContext() -> AnyPublisher<Event, Never> {
+        return Just(Event.start(contextCredential: URLCredential(
+            user: "f67e3244100be4de079f73a586ccc1d5b1b69442dfb7db20178cd1f9f41d9483",
+            password: "Ninik7474",
+            persistence: .none
+        ))).eraseToAnyPublisher()
+    }
+    
+    static func signingRequest(service: Web3Manager, credential: URLCredential) -> AnyPublisher<Event, Never> {
+        Future { promise in
+            Task {
+                let loginEvent = await service.setup(password: credential.password ?? "",
+                                                     privateKey: credential.user)
+                promise(Result.success(loginEvent))
+            }
+        }.eraseToAnyPublisher()
     }
     
     static func loginReducer(
@@ -71,12 +58,23 @@ extension Scenes.Login {
     ) -> AnyPublisher<Event, Never> {
         switch event {
         case .epsilon:
-            break
-        case .start:
-            break
+            state = .readingContext
+            return readContext()
+            
+        case .start(let credentials):
+            state = .signInPrompt(withContext: credentials)
+            
         case .intentSignIn(credential: let credential):
-            break
+            state = .signingIn
+            return signingRequest(service: environment.service,
+                                  credential: credential)
         case .signedIn:
+            state = .signedIn
+            
+        case .signinError(error: let error):
+            state = .signinFailure(error)
+            
+        case .intentDismissError:
             break
         }
         return Empty().eraseToAnyPublisher()

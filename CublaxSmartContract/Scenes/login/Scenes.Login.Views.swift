@@ -10,7 +10,8 @@ import Combine
 
 extension Scenes.Login {
     struct ContentView: View {
-        let viewState: ViewState
+        var initialPrivateKey: String
+        var initialPassword: String
         let send: (_: Event) -> Void
         
         @SwiftUI.State private var username = ""
@@ -31,10 +32,16 @@ extension Scenes.Login {
                             .keyboardType(.default)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
+                            .onAppear {
+                                username = initialPrivateKey
+                            }
                         
                         SecureField("Password", text: $password)
                             .focused($focusedField, equals: .password)
                             .textContentType(.password)
+                            .onAppear {
+                                password = initialPassword
+                            }
                     }
                 }
                 Button("Sign-In") {
@@ -83,8 +90,9 @@ extension Scenes.Login {
         }
         var body: some View {
             ContentView(
-                viewState: viewModel.viewState,
-                send: viewModel.send)
+                initialPrivateKey: viewModel.viewState.privateKey,
+                initialPassword: viewModel.viewState.password,
+                send: viewModel.send(_:))
         }
     }
 }
@@ -92,7 +100,10 @@ extension Scenes.Login {
 struct LoginScene_Previews: PreviewProvider {
     static var previews: some View {
         let state: Scenes.Login.ViewState = .init()
-        Scenes.Login.ContentView(viewState: state,
-                                 send: { _ in })
+        Scenes.Login.ContentView(
+            initialPrivateKey: state.privateKey,
+            initialPassword: state.password,
+            send: { _ in }
+        )
     }
 }

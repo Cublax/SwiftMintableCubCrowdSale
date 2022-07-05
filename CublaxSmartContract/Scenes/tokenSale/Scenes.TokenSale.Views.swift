@@ -46,9 +46,9 @@ extension Scenes.TokenSale {
 
 struct TokenSaleScene_Previews: PreviewProvider {
     static var previews: some View {
-        let state: Scenes.Login.ViewState = .init()
-        Scenes.Login.ContentView(viewState: state,
-                                 send: { _ in })
+        let state: Scenes.TokenSale.ViewState = .init()
+        Scenes.TokenSale.ContentView(viewState: state,
+                                     send: { _ in })
     }
 }
 

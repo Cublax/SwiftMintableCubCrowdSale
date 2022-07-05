@@ -7,16 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0D81E741-10C4-4151-B3BC-95BAB9FD75A7"
+            uuid = "55128C16-80B5-4C1F-A475-5D3F9A3C10CD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.ViewModel.swift"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.Store.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "view(_:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "loginReducer(state:event:environment:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D1A2B7E-C137-4887-9409-92BDE6DBC517"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CublaxSmartContract/Scenes/login/Scenes.Login.Store.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "signingRequest(service:credential:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

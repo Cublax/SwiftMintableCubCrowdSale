@@ -37,13 +37,11 @@ extension Scenes.Login {
         private func view(_ output: State) -> ViewState {
             switch output {
             case .start:
-                 return .init()
-//                return .init(privateKey: "private key test",
-//                             password: "",
-//                             error: nil)
-            case .signInPrompt(credential: let credentials):
-                return  .init(privateKey: credentials.user ?? "",
-                              password: credentials.password ?? "",
+                return .init()
+                
+            case .signInPrompt(withContext: let credentials):
+                return  .init(privateKey: credentials?.user ?? "",
+                              password: credentials?.password ?? "",
                               error: nil)
                 
             default:

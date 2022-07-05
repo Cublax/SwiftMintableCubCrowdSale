@@ -8,6 +8,7 @@
 import Foundation
 import web3swift
 import BigInt
+import Combine
 
 actor Web3Manager {
     var wallet: Wallet!
@@ -21,13 +22,15 @@ actor Web3Manager {
         token = initizalizeToken()
     }
     
-    func setup(password: String, privateKey: String?) async {
+    func setup(password: String, privateKey: String?) -> Scenes.Login.Event {
         if let privateKey = privateKey {
             wallet = initializeWallet(password: password, privateKey: privateKey)
         }
         keystoreManager = getKeyStoreManager(walletData: wallet.data,
                                              isWalletHD: wallet.isHD)
         web3 = initializeweb3(keystoreManager: keystoreManager)
+        
+        return Scenes.Login.Event.signedIn
     }
     
     private func initizalizeToken() -> ERC20Token {

@@ -40,7 +40,7 @@ extension Scenes.Main {
     static let tokenSaleReducer = Scenes.TokenSale.tokenSaleReducer(state:event:environment:)
     
     static var loginStore = Scenes.Login.LoginStore(
-        initialState: .init(),
+        initialState: appState.loginState,
         reducer: loginReducer,
         environment: world
     )
@@ -71,6 +71,9 @@ extension Scenes.Main {
                     default:
                         isLoginPresented = true
                     }
+                }
+                .onAppear {
+                    loginStore.send(.epsilon)
                 }
         }
     }
