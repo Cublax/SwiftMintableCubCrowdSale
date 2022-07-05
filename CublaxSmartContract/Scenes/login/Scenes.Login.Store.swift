@@ -68,6 +68,7 @@ extension Scenes.Login {
             state = .signingIn
             return signingRequest(service: environment.service,
                                   credential: credential)
+            
         case .signedIn:
             state = .signedIn
             

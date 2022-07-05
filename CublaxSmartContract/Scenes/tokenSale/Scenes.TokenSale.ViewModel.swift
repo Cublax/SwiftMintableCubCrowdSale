@@ -34,13 +34,6 @@ extension Scenes.TokenSale {
             store.send(event)
         }
         
-        func getweb3values() async {
-            Task {
-                // viewState.accountBalance = try await web3Manager.getAccountBalance()
-                // viewState.tokenBalance = try await web3Manager.getTokenBalance()
-            }
-        }
-        
         private func view(_ output: State) -> ViewState {
             switch output {
             case .placeHolder:
