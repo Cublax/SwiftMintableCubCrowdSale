@@ -14,30 +14,29 @@ actor Web3Manager {
     var wallet: Wallet!
     var keystoreManager: KeystoreManager!
     var web3: web3!
-    var token: ERC20Token!
+    let cublaxToken: ERC20Token
     let cublaxTokenSaleAddress: String
     
     init() {
         cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
-        token = initizalizeToken()
-    }
-    
-    func setup(password: String, privateKey: String) -> Scenes.Login.Event {
-        wallet = initializeWallet(password: password, privateKey: privateKey)
-        keystoreManager = getKeyStoreManager(walletData: wallet.data,
-                                             isWalletHD: wallet.isHD)
-        web3 = initializeweb3(keystoreManager: keystoreManager)
-        
-        return Scenes.Login.Event.signedIn
-    }
-    
-    private func initizalizeToken() -> ERC20Token {
-        return ERC20Token(
+        cublaxToken = ERC20Token(
             name: "Cublax Token",
             address: "0xB55A30EA9F28D361655CA7C253D76e15C35BCAE5",
             decimals: "0",
             symbol: "Cub"
         )
+    }
+    
+    func setup(password: String, privateKey: String) -> Scenes.Login.Event {
+        do {
+            wallet = try initializeWallet(password: password, privateKey: privateKey)
+            keystoreManager = getKeyStoreManager(walletData: wallet.data,
+                                                 isWalletHD: wallet.isHD)
+            web3 = initializeweb3(keystoreManager: keystoreManager)
+            return Scenes.Login.Event.signedIn
+        } catch {
+            return Scenes.Login.Event.signinError(error: error)
+        }
     }
     
     private func initializeweb3(keystoreManager: KeystoreManager) -> web3 {
@@ -46,7 +45,7 @@ actor Web3Manager {
         return web3
     }
     
-    private func initializeWallet(password: String, privateKey: String) -> Wallet? {
+    private func initializeWallet(password: String, privateKey: String) throws -> Wallet {
         let formattedKey = privateKey.trimmingCharacters(in: .whitespacesAndNewlines)
         let dataKey = Data.fromHex(formattedKey)!
         let name = "Account 1"
@@ -57,7 +56,7 @@ actor Web3Manager {
             return Wallet(address: address, data: keyData, name: name, isHD: false)
         } catch {
             print("wallet init failed: \(error)")
-            return nil
+            throw error
         }
     }
     
@@ -88,7 +87,7 @@ actor Web3Manager {
     func getTokenBalance() async throws -> String {
         let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
         let exploredAddress = EthereumAddress(wallet.address)! // Address which balance we want to know. Here we used same wallet address
-        let erc20ContractAddress = EthereumAddress(token.address)!
+        let erc20ContractAddress = EthereumAddress(cublaxToken.address)!
         let contract = web3.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
         var options = TransactionOptions.defaultOptions
         options.from = walletAddress
