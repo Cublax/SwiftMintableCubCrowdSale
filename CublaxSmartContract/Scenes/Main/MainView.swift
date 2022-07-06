@@ -25,7 +25,11 @@ extension Scenes.Main {
         
         init() {
             self.loginState = .start
-            self.tokenSaleState = .placeHolder
+            self.tokenSaleState = .displayDashboard(
+                accountBalance: "",
+                totalTokenSupply: 0,
+                tokenBalance: ""
+            )
         }
     }
     
@@ -45,7 +49,7 @@ extension Scenes.Main {
         environment: world
     )
     static let tokenSaleStore = Scenes.TokenSale.TokenSaleStore(
-        initialState: .init(),
+        initialState: appState.tokenSaleState,
         reducer: tokenSaleReducer,
         environment: world
     )

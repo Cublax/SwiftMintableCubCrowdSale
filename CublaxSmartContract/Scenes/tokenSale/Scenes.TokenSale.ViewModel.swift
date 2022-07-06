@@ -36,11 +36,9 @@ extension Scenes.TokenSale {
         
         private func view(_ output: State) -> ViewState {
             switch output {
-            case .placeHolder:
-                return .init()
+            case .displayDashboard(accountBalance: let accountBalance, totalTokenSupply: let totalTokenSupply, tokenBalance: let tokenBalance):
+                return .init(accountBalance: accountBalance, totalTokenSupply: totalTokenSupply, tokenBalance: tokenBalance)
             case .fetchingValues:
-                return .init(accountBalance: "it works", totalTokenSupply: 111, tokenBalance: "couille")
-            case .valuesFetched:
                 return .init()
             }
         }
