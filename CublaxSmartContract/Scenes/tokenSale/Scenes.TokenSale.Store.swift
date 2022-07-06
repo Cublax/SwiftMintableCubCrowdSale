@@ -59,12 +59,11 @@ extension Scenes.TokenSale {
             accountBalance: let accountBalance,
             totalTokenSupply: let totalTokenSupply,
             tokenBalance: let tokenBalance
-        ):
-            state = .displayDashboard(
-                accountBalance: accountBalance,
-                totalTokenSupply: totalTokenSupply,
-                tokenBalance: tokenBalance
-            )
+        ): state = .displayDashboard(
+            accountBalance: accountBalance,
+            totalTokenSupply: totalTokenSupply,
+            tokenBalance: tokenBalance
+        )
         case .fetchingError(error: _):
             break
         }

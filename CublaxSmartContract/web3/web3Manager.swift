@@ -22,10 +22,8 @@ actor Web3Manager {
         token = initizalizeToken()
     }
     
-    func setup(password: String, privateKey: String?) -> Scenes.Login.Event {
-        if let privateKey = privateKey {
-            wallet = initializeWallet(password: password, privateKey: privateKey)
-        }
+    func setup(password: String, privateKey: String) -> Scenes.Login.Event {
+        wallet = initializeWallet(password: password, privateKey: privateKey)
         keystoreManager = getKeyStoreManager(walletData: wallet.data,
                                              isWalletHD: wallet.isHD)
         web3 = initializeweb3(keystoreManager: keystoreManager)
@@ -128,7 +126,7 @@ actor Web3Manager {
             extraData: Data(),
             transactionOptions: options)!
         do {
-            let password = "Ninik7474"
+            let password = "Cublax.74"
             let result = try tx.send(password: password)
             print(result)
         } catch {
@@ -158,7 +156,7 @@ actor Web3Manager {
             extraData: extraData,
             transactionOptions: options)!
         do {
-            let password = "Ninik7474"
+            let password = "Cublax.74"
             let result = try tx.send(password: password)
             print(result)
         } catch {

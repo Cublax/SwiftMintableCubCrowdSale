@@ -45,7 +45,7 @@ extension Scenes.Login {
         Future { promise in
             Task {
                 let loginEvent = await service.setup(password: credential.password ?? "",
-                                                     privateKey: credential.user)
+                                                     privateKey: credential.user ?? "")
                 promise(Result.success(loginEvent))
             }
         }.eraseToAnyPublisher()
