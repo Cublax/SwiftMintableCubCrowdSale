@@ -35,8 +35,8 @@ extension Scenes.Login {
     
     static func readContext() -> AnyPublisher<Event, Never> {
         return Just(Event.start(contextCredential: URLCredential(
-            user: "f67e3244100be4de079f73a586ccc1d5b1b69442dfb7db20178cd1f9f41d9483",
-            password: "Ninik7474",
+            user: "12dd3d149cb77bc52df41f0a6f4ae24896b3a166ddfd5092f2f5d13f9f3a0eb1",
+            password: "Cublax.74",
             persistence: .none
         ))).eraseToAnyPublisher()
     }
