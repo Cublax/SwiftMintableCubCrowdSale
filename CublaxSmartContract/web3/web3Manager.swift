@@ -16,6 +16,7 @@ actor Web3Manager {
     var web3: web3!
     let cublaxToken: ERC20Token
     let cublaxTokenSaleAddress: String
+    private var password: String!
     
     init() {
         cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
@@ -33,6 +34,7 @@ actor Web3Manager {
             keystoreManager = getKeyStoreManager(walletData: wallet.data,
                                                  isWalletHD: wallet.isHD)
             web3 = initializeweb3(keystoreManager: keystoreManager)
+            self.password = password
             return Scenes.Login.Event.signedIn
         } catch {
             return Scenes.Login.Event.signinError(error: error)
@@ -125,7 +127,6 @@ actor Web3Manager {
             extraData: Data(),
             transactionOptions: options)!
         do {
-            let password = "Cublax.74"
             let result = try tx.send(password: password)
             print(result)
         } catch {
@@ -133,8 +134,8 @@ actor Web3Manager {
         }
     }
     
-    func callSmartContract() {
-        let value: String = "1" // Any amount of Ether you need to send
+    func buyCubToken(amount: Int) throws -> Scenes.TokenSale.Event {
+        let value: String = "\(amount)" // Any amount of Ether you need to send
         let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
         let contractAddress = EthereumAddress(cublaxTokenSaleAddress)!
         let contractMethod = "buyTokens" // Contract method you want to write
@@ -155,11 +156,12 @@ actor Web3Manager {
             extraData: extraData,
             transactionOptions: options)!
         do {
-            let password = "Cublax.74"
             let result = try tx.send(password: password)
             print(result)
+            return .statusUpdated
         } catch {
             print("Token Balance failed: \(error)")
+            return .buyTokenError(error: error)
         }
     }
 }

@@ -71,7 +71,7 @@ extension Scenes.Main {
                     switch loginStoreState {
                     case .signedIn:
                         isLoginPresented = false
-                        tokenSaleStore.send(.logedIn)
+                        tokenSaleStore.send(.statusUpdated)
                     default:
                         isLoginPresented = true
                     }

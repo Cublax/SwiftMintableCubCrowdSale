@@ -12,12 +12,15 @@ extension Scenes.TokenSale {
     
     enum Event {
         case epsilon
+        
         // Intents, sent from the UI
+        case intentBuyToken(amount: Int)
         
         // Effect Outputs
-        case logedIn
+        case statusUpdated
         case receivedValues(accountBalance: String, totalTokenSupply: Int, tokenBalance: String)
         case fetchingError(error: Swift.Error)
+        case buyTokenError(error: Swift.Error)
     }
     
     enum State {
@@ -42,6 +45,15 @@ extension Scenes.TokenSale {
         }.eraseToAnyPublisher()
     }
     
+    static func buyToken(amount: Int, service: Web3Manager) -> AnyPublisher<Event, Never> {
+        Future { promise in
+            Task {
+                let buyingStatus = try await service.buyCubToken(amount: amount)
+                promise(Result.success(buyingStatus))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     static func tokenSaleReducer(
         state: inout State,
         event: Event,
@@ -49,9 +61,13 @@ extension Scenes.TokenSale {
     ) -> AnyPublisher<Event, Never> {
         switch event {
         case .epsilon:
-            state = .displayDashboard(accountBalance: "no data", totalTokenSupply: 0, tokenBalance: "no data")
+            state = .displayDashboard(
+                accountBalance: "no data",
+                totalTokenSupply: 0,
+                tokenBalance: "no data"
+            )
             
-        case .logedIn:
+        case .statusUpdated:
             state = .fetchingValues
             return fetchValues(service: environment.service)
             
@@ -64,9 +80,20 @@ extension Scenes.TokenSale {
             totalTokenSupply: totalTokenSupply,
             tokenBalance: tokenBalance
         )
+            
+        case .intentBuyToken(let amount):
+            return buyToken(
+                amount: amount,
+                service: environment.service
+            )
+            
         case .fetchingError(error: _):
             break
+            
+        case .buyTokenError(error: _):
+            break
         }
+        
         return Empty().eraseToAnyPublisher()
     }
     
