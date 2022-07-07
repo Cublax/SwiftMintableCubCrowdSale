@@ -27,7 +27,7 @@ extension Scenes.Main {
             self.loginState = .start
             self.tokenSaleState = .displayDashboard(
                 accountBalance: "",
-                totalTokenSupply: 0,
+                totalTokenSupply: "",
                 tokenBalance: ""
             )
         }

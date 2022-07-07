@@ -86,9 +86,9 @@ actor Web3Manager {
         }
     }
     
-    func getTokenBalance() async throws -> String {
+    func getTokenBalance(address: String) async throws -> String {
         let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
-        let exploredAddress = EthereumAddress(wallet.address)! // Address which balance we want to know. Here we used same wallet address
+        let exploredAddress = EthereumAddress(address)! 
         let erc20ContractAddress = EthereumAddress(cublaxToken.address)!
         let contract = web3.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
         var options = TransactionOptions.defaultOptions
@@ -109,6 +109,31 @@ actor Web3Manager {
             return "Token Balance failed: \(error)"
         }
     }
+    
+    func getTokenSupply() async throws -> String {
+        let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
+        let exploredAddress = EthereumAddress(cublaxToken.address)! // Address which balance we want to know. Here we used same wallet address
+        let erc20ContractAddress = EthereumAddress(cublaxToken.address)!
+        let contract = web3.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
+        var options = TransactionOptions.defaultOptions
+        options.from = exploredAddress
+        options.gasPrice = .automatic
+        options.gasLimit = .automatic
+        let method = "totalSupply"
+        let tx = contract.read(
+            method,
+            parameters: [AnyObject](),
+            extraData: Data(),
+            transactionOptions: options)!
+        do {
+            let call = try tx.call()
+            let balanceBigUInt = call["0"] as! BigUInt
+            return String(balanceBigUInt)
+        } catch {
+            return "Token Balance failed: \(error)"
+        }
+    }
+
     
     func transferWeiToTokenSale() {
         let value: String = "1"

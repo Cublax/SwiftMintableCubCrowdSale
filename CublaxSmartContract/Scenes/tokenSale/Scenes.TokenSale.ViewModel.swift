@@ -11,7 +11,7 @@ import Combine
 extension Scenes.TokenSale {
     struct ViewState {
         var accountBalance = ""
-        var totalTokenSupply = 0
+        var totalTokenSupply = ""
         var tokenBalance = ""
     }
 }

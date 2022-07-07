@@ -18,13 +18,13 @@ extension Scenes.TokenSale {
         
         // Effect Outputs
         case statusUpdated
-        case receivedValues(accountBalance: String, totalTokenSupply: Int, tokenBalance: String)
+        case receivedValues(accountBalance: String, totalTokenSupply: String, tokenBalance: String)
         case fetchingError(error: Swift.Error)
         case buyTokenError(error: Swift.Error)
     }
     
     enum State {
-        case displayDashboard(accountBalance: String, totalTokenSupply: Int, tokenBalance: String)
+        case displayDashboard(accountBalance: String, totalTokenSupply: String, tokenBalance: String)
         case fetchingValues
     }
     
@@ -32,12 +32,13 @@ extension Scenes.TokenSale {
         Future { promise in
             Task {
                 let accountBalance = try await service.getAccountBalance()
-                let tokenBalance = try await service.getTokenBalance()
+                let totalTokenSupply = try await service.getTokenSupply()
+                let accountTokenBalance = try await service.getTokenBalance(address: service.wallet.address)
                 promise(Result.success(
                     .receivedValues(
                         accountBalance: accountBalance,
-                        totalTokenSupply: 0,
-                        tokenBalance: tokenBalance
+                        totalTokenSupply: totalTokenSupply,
+                        tokenBalance: accountTokenBalance
                     )
                 )
                 )
@@ -63,7 +64,7 @@ extension Scenes.TokenSale {
         case .epsilon:
             state = .displayDashboard(
                 accountBalance: "no data",
-                totalTokenSupply: 0,
+                totalTokenSupply: "no date",
                 tokenBalance: "no data"
             )
             
