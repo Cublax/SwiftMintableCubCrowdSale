@@ -76,8 +76,9 @@ extension Scenes.Login {
             state = .present(error)
             
         case .intentDismissError:
-            break
+            state = .signInPrompt(withContext: nil)
         }
+        
         return Empty().eraseToAnyPublisher()
     }
     

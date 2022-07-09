@@ -30,10 +30,14 @@ extension Scenes.TokenSale {
                                 tokenToBuy += 1
                             }
                             Button("-") {
-                                tokenToBuy -= 1
+                                tokenToBuy -= (tokenToBuy > 0) ? 1 : 0
                             }
                         }
                     }
+                }
+            }.alert(viewState.errorMessage, isPresented: viewState.$displayAlert) {
+                Button("OK", role: .cancel) {
+                    send(.intentDismissError(oldState: viewState))
                 }
             }
         }

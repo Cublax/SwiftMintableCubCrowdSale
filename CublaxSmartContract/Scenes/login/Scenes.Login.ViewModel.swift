@@ -7,12 +7,14 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 extension Scenes.Login {
     struct ViewState {
         var privateKey = ""
         var password = ""
-        var error: Swift.Error?
+        @SwiftUI.State var displayAlert = false
+        var error: Web3Error?
     }
 }
 

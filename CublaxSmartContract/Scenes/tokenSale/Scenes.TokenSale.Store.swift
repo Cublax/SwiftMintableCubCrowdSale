@@ -15,6 +15,7 @@ extension Scenes.TokenSale {
         
         // Intents, sent from the UI
         case intentBuyToken(amount: Int)
+        case intentDismissError(oldState: ViewState)
         
         // Effect Outputs
         case statusUpdated
@@ -82,11 +83,12 @@ extension Scenes.TokenSale {
             accountBalance: let accountBalance,
             totalTokenSupply: let totalTokenSupply,
             tokenBalance: let tokenBalance
-        ): state = .displayDashboard(
-            accountBalance: accountBalance,
-            totalTokenSupply: totalTokenSupply,
-            tokenBalance: tokenBalance
-        )
+        ):
+            state = .displayDashboard(
+                accountBalance: accountBalance,
+                totalTokenSupply: totalTokenSupply,
+                tokenBalance: tokenBalance
+            )
             
         case .intentBuyToken(let amount):
             return buyToken(
@@ -94,9 +96,15 @@ extension Scenes.TokenSale {
                 service: environment.service
             )
             
-        case .web3Error(_):
-            //present error
-            break
+        case .web3Error(let error):
+            state = .present(error)
+            
+        case .intentDismissError(oldState: let oldState):
+            state = .displayDashboard(
+                accountBalance: oldState.accountBalance,
+                totalTokenSupply: oldState.totalTokenSupply,
+                tokenBalance: oldState.tokenBalance
+            )
         }
         
         return Empty().eraseToAnyPublisher()
