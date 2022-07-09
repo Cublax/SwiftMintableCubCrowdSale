@@ -93,6 +93,7 @@ extension Scenes.TokenSale {
                 amount: amount,
                 service: environment.service
             )
+            
         case .web3Error(_):
             //present error
             break

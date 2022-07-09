@@ -13,6 +13,8 @@ extension Scenes.TokenSale {
         var accountBalance = ""
         var totalTokenSupply = ""
         var tokenBalance = ""
+        var displayAlert = false
+        var error: Web3Error?
     }
 }
 
@@ -40,7 +42,7 @@ extension Scenes.TokenSale {
                 return .init(accountBalance: accountBalance, totalTokenSupply: totalTokenSupply, tokenBalance: tokenBalance)
             case .fetchingValues:
                 return .init()
-            case .present(let error):
+            case .present(_):
                 return viewState
             }
         }

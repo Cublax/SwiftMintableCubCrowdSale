@@ -132,7 +132,7 @@ actor Web3Manager {
             let balanceBigUInt = call["0"] as! BigUInt
             return String(balanceBigUInt)
         } catch {
-            print("Token Balance failed: \(error)")
+            print("Token supply failed: \(error)")
             throw Web3Error.getTokenSupply(error)
         }
     }
@@ -157,7 +157,7 @@ actor Web3Manager {
             let result = try tx.send(password: password)
             print(result)
         } catch {
-            print("Token Balance failed: \(error)")
+            print("Transfer Wei failed: \(error)")
             throw Web3Error.transferWeiToCubTokenSale(error)
         }
     }
@@ -188,7 +188,7 @@ actor Web3Manager {
             print(result)
             return .statusUpdated
         } catch {
-            print("Token Balance failed: \(error)")
+            print("Buy Cub Token failed: \(error)")
             return .web3Error(.buyCubToken(error))
         }
     }
