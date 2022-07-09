@@ -21,7 +21,7 @@ extension Scenes.Login {
         // Effect Outputs
         case start(contextCredential: URLCredential)
         case signedIn
-        case signinError(error: Swift.Error)
+        case web3Error(Web3Error)
     }
     
     enum State {
@@ -29,7 +29,7 @@ extension Scenes.Login {
         case readingContext
         case signInPrompt(withContext: URLCredential?)
         case signingIn
-        case signinFailure(Swift.Error)
+        case present(Web3Error)
         case signedIn
     }
     
@@ -72,8 +72,8 @@ extension Scenes.Login {
         case .signedIn:
             state = .signedIn
             
-        case .signinError(error: let error):
-            state = .signinFailure(error)
+        case .web3Error(error: let error):
+            state = .present(error)
             
         case .intentDismissError:
             break

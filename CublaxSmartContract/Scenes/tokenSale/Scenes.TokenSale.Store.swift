@@ -19,29 +19,35 @@ extension Scenes.TokenSale {
         // Effect Outputs
         case statusUpdated
         case receivedValues(accountBalance: String, totalTokenSupply: String, tokenBalance: String)
-        case fetchingError(error: Swift.Error)
-        case buyTokenError(error: Swift.Error)
+        case web3Error(Web3Error)
     }
     
     enum State {
         case displayDashboard(accountBalance: String, totalTokenSupply: String, tokenBalance: String)
         case fetchingValues
+        case present(Web3Error)
     }
     
     static func fetchValues(service: Web3Manager) -> AnyPublisher<Event, Never> {
         Future { promise in
             Task {
-                let accountBalance = try await service.getAccountBalance()
-                let totalTokenSupply = try await service.getTokenSupply()
-                let accountTokenBalance = try await service.getTokenBalance(address: service.wallet.address)
-                promise(Result.success(
-                    .receivedValues(
-                        accountBalance: accountBalance,
-                        totalTokenSupply: totalTokenSupply,
-                        tokenBalance: accountTokenBalance
-                    )
-                )
-                )
+                do {
+                    let accountBalance = try await service.getAccountBalance()
+                    let totalTokenSupply = try await service.getTokenSupply()
+                    let accountTokenBalance = try await service.getTokenBalance(address: service.wallet.address)
+                    promise(Result.success(
+                        .receivedValues(
+                            accountBalance: accountBalance,
+                            totalTokenSupply: totalTokenSupply,
+                            tokenBalance: accountTokenBalance
+                        )
+                    ))
+                } catch {
+                    let error = error as? Web3Error
+                    promise(Result.success(
+                        .web3Error(error ?? .undefined)
+                    ))
+                }
             }
         }.eraseToAnyPublisher()
     }
@@ -49,7 +55,7 @@ extension Scenes.TokenSale {
     static func buyToken(amount: Int, service: Web3Manager) -> AnyPublisher<Event, Never> {
         Future { promise in
             Task {
-                let buyingStatus = try await service.buyCubToken(amount: amount)
+                let buyingStatus = await service.buyCubToken(amount: amount)
                 promise(Result.success(buyingStatus))
             }
         }.eraseToAnyPublisher()
@@ -87,11 +93,8 @@ extension Scenes.TokenSale {
                 amount: amount,
                 service: environment.service
             )
-            
-        case .fetchingError(error: _):
-            break
-            
-        case .buyTokenError(error: _):
+        case .web3Error(_):
+            //present error
             break
         }
         

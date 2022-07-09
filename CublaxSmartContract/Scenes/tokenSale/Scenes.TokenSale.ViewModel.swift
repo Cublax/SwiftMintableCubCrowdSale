@@ -40,6 +40,8 @@ extension Scenes.TokenSale {
                 return .init(accountBalance: accountBalance, totalTokenSupply: totalTokenSupply, tokenBalance: tokenBalance)
             case .fetchingValues:
                 return .init()
+            case .present(let error):
+                return viewState
             }
         }
     }
