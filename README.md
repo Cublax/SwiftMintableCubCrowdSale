@@ -2,30 +2,13 @@
 
 Swift web3 dApp - Connect your wallet, see you Eth Balance, interact with CubMintableTokenSale
 
-SwiftWeb3 project intreracting with the ['CubMintableTokenCrowdSale'](https://cublax.github.io/MintableTokenCrowdSale/)
+SwiftWeb3 project intreracting with the [CubMintableTokenCrowdSale](https://cublax.github.io/MintableTokenCrowdSale/)
 
-# Skills Used:
-* Blockchain:  
-  Smart contract development   
-   -Solidity  
-   -KYC Whitelisting  
-   -Crowdsales  
-   -Workflow with Truffle  
-  Smart contract deployment to Ganache
-  Smart contract testing with Truffle  
-* Front-end:  
-  SwiftUI
-  Combine
-  Asynchronous 
-  Smart contract interaction   
-
+This DApp is build with the latest iOS technologies on the Redux-like pattern.
 
 # Technologies Used:
+* [web3swift](https://github.com/skywinder/web3swift)
 * SwiftUI
-* OpenZeppelin
 * MetaMask
-* Truffle
-* Web3
-* CSS3
 * Git
 * GitHub
