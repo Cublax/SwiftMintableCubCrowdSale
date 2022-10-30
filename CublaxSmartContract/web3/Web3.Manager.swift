@@ -19,10 +19,10 @@ actor Web3Manager {
     private var password: String!
     
     init() {
-        cublaxTokenSaleAddress = "0x985F086cda11d62E3fBe9Db37a0423160DEf7a04"
+        cublaxTokenSaleAddress = "0x470FfCAbfAC724EB9767e2bbefAe5105F25D837b"
         cublaxToken = ERC20Token(
             name: "Cublax Token",
-            address: "0xB55A30EA9F28D361655CA7C253D76e15C35BCAE5",
+            address: "0x150584E4dCa8EE95B59740e3cEA807196624569D",
             decimals: "0",
             symbol: "Cub"
         )
@@ -43,7 +43,7 @@ actor Web3Manager {
     }
     
     private func initializeweb3(keystoreManager: KeystoreManager) -> web3 {
-        let web3 = web3swift.web3(provider: Web3HttpProvider(URL(string: "https://ropsten.infura.io/v3/b721b56d79b04a47aeaf08d18dbc3b2e")!)!)
+        let web3 = web3swift.web3(provider: Web3HttpProvider(URL(string: "https://sepolia.infura.io/v3/b721b56d79b04a47aeaf08d18dbc3b2e")!)!)
         web3.addKeystoreManager(keystoreManager)
         return web3
     }
