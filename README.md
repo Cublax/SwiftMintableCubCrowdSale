@@ -1,4 +1,4 @@
-# SwiftWeb3 of [CubMintableTokenCrowdSale](https://github.com/Cublax/MintableTokenCrowdSale) on the Ropsten Network
+# SwiftWeb3 of [CubMintableTokenCrowdSale](https://github.com/Cublax/MintableTokenCrowdSale) on the Sepolia Network
 
 [web version here](https://cublax.github.io/MintableTokenCrowdSale/)
 
@@ -14,6 +14,6 @@ Once logged in, you will access the following functionnalities:
 ### Technologies Used:
 * [web3swift](https://github.com/skywinder/web3swift)
 * SwiftUI
-* Ropsten Ethereum Network
+* Sepolia Ethereum Network
 * MetaMask
 * Git
