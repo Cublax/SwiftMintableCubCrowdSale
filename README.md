@@ -2,14 +2,17 @@
 
 [web version here](https://cublax.github.io/MintableTokenCrowdSale/)
 
-This DApp is built with the latest swift technologies on the Redux-like pattern.
-A whitelisted account is provided for testing purpose, however you are free to log-in with you own account. If so you won't be able to buy token since your public key needs to be whitelisted by my personal account.
+### Architecture:
+This DApp is built following The Composable Architecture.
 
-Once logged in, you will access the following functionnalities:
-* ETH balance
-* Total Cub Token Supply
-* Personal Cub Token Supply
-* Buy Cub Token
+### The App:
+A whitelisted account is provided for testing purpose.
+It is possible to login with your own account on the Sepolia chain, however you won't be able to access the functionnalities of this token sale because your account needs to be whitelisted by my personnal account.
+Once you are logged in, you can monitor and access the following functionnalities:
+* See my account ETH balance
+* See the total Cub Token Supply
+* See my personal Cub Token Supply
+* Buy more Cub Token
 
 ### Technologies Used:
 * [web3swift](https://github.com/skywinder/web3swift)
