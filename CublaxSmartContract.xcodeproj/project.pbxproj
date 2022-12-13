@@ -22,6 +22,7 @@
 		32B4D16A2856D255006799D6 /* Scenes.Login.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4D1692856D255006799D6 /* Scenes.Login.ViewModel.swift */; };
 		32B4D16E2856D373006799D6 /* Web3.Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4D16D2856D373006799D6 /* Web3.Manager.swift */; };
 		32B4D1712856DAE8006799D6 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 32B4D1702856DAE8006799D6 /* web3swift */; };
+		32DEE5AD29489634005A4F8D /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DEE5AC29489634005A4F8D /* ActivityIndicator.swift */; };
 		32E8D8E828504A670083D517 /* CublaxSmartContractApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */; };
 		32E8D8EC28504A680083D517 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EB28504A680083D517 /* Assets.xcassets */; };
 		32E8D8EF28504A680083D517 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E8D8EE28504A680083D517 /* Preview Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		32A1B3042857094B00FBFA8F /* CubTokenCrowdSale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubTokenCrowdSale.swift; sourceTree = "<group>"; };
 		32B4D1692856D255006799D6 /* Scenes.Login.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.Login.ViewModel.swift; sourceTree = "<group>"; };
 		32B4D16D2856D373006799D6 /* Web3.Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3.Manager.swift; sourceTree = "<group>"; };
+		32DEE5AC29489634005A4F8D /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		32E8D8E428504A670083D517 /* CublaxSmartContract.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CublaxSmartContract.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CublaxSmartContractApp.swift; sourceTree = "<group>"; };
 		32E8D8EB28504A680083D517 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +123,14 @@
 			path = web3;
 			sourceTree = "<group>";
 		};
+		32DEE5AB29489614005A4F8D /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				32DEE5AC29489634005A4F8D /* ActivityIndicator.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		32E8D8DB28504A670083D517 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +153,7 @@
 				32E8D8E728504A670083D517 /* CublaxSmartContractApp.swift */,
 				32A1B3032857091500FBFA8F /* ABI */,
 				32A1B2FC2857081200FBFA8F /* Model */,
+				32DEE5AB29489614005A4F8D /* Styles */,
 				32E8D8F52850530D0083D517 /* Scenes */,
 				32B4D16C2856D33D006799D6 /* web3 */,
 				32E8D8EB28504A680083D517 /* Assets.xcassets */,
@@ -262,6 +273,7 @@
 				32984AA9285C2F0800E4A3DF /* Scenes.Login.Store.swift in Sources */,
 				3245A77F28582BCB001F8820 /* Scenes.TokenSale.Views.swift in Sources */,
 				3223243E286B1043002FC01C /* Scenes.TokenSale.Store.swift in Sources */,
+				32DEE5AD29489634005A4F8D /* ActivityIndicator.swift in Sources */,
 				32EA8A252879950600707C82 /* Web3.Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
