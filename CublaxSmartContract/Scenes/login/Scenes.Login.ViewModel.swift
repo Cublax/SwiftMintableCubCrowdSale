@@ -42,6 +42,15 @@ extension Scenes.Login {
             }
         }
         
+        var presentAlert: Bool {
+            switch self {
+            case .showingError(_):
+                return true
+            default:
+                return false
+            }
+        }
+        
         var error: Web3Error? {
             switch self {
             case .showingError(let error):

@@ -49,7 +49,7 @@ extension Scenes.Login {
                                             privateKey: credential.user ?? "")
                     promise(.success(.signedIn))
                 } catch {
-                    promise(.success(.web3Error(error as! Web3Error)))
+                    promise(.success(.web3Error(.initializeWallet(error))))
                 }
             }
         }.eraseToAnyPublisher()

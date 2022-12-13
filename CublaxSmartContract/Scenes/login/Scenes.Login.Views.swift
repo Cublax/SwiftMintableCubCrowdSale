@@ -23,6 +23,11 @@ extension Scenes.Login {
         @FocusState private var focusedField: Field?
         
         var body: some View {
+            let presentAlert = Binding<Bool>(
+                get: { self.viewState.error != nil },
+                set: { _ in intentDismissError() }
+            )
+            
             VStack {
                 Form {
                     Section(header: Text("Credential")) {
@@ -51,7 +56,14 @@ extension Scenes.Login {
                                                persistence: .none))
                 }
                 .padding()
-            }.loading(viewState.isLoading)
+            }
+            .loading(viewState.isLoading)
+            .alert(viewState.error?.getErrorMessage() ?? "",
+                   isPresented: presentAlert) {
+                Button("OK", role: .cancel) {
+                    intentDismissError()
+                }
+            }
             .navigationBarTitle("Sign-In")
         }
     }

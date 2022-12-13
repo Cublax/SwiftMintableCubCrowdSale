@@ -79,8 +79,8 @@ actor Web3Manager {
     }
     
     func getAccountBalance() async throws -> String {
-        let walletAddress = EthereumAddress(wallet.address)! // Address which balance we want to know
         do {
+            let walletAddress = EthereumAddress(wallet.address)!
             let balanceResult = try web3.eth.getBalance(address: walletAddress)
             let balanceString = Web3.Utils.formatToEthereumUnits(balanceResult, toUnits: .eth, decimals: 5)!
             return balanceString
@@ -116,7 +116,7 @@ actor Web3Manager {
     }
     
     func getTokenSupply() async throws -> String {
-        let exploredAddress = EthereumAddress(cublaxToken.address)! // Address which balance we want to know. Here we used same wallet address
+        let exploredAddress = EthereumAddress(cublaxToken.address)!
         let erc20ContractAddress = EthereumAddress(cublaxToken.address)!
         let contract = web3.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
         var options = TransactionOptions.defaultOptions
