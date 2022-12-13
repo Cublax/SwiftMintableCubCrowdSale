@@ -44,9 +44,13 @@ extension Scenes.Login {
     static func signingRequest(service: Web3Manager, credential: URLCredential) -> AnyPublisher<Event, Never> {
         Future { promise in
             Task {
-                let loginEvent = await service.setup(password: credential.password ?? "",
-                                                     privateKey: credential.user ?? "")
-                promise(Result.success(loginEvent))
+                do {
+                    try await service.setup(password: credential.password ?? "",
+                                            privateKey: credential.user ?? "")
+                    promise(.success(.signedIn))
+                } catch {
+                    promise(.success(.web3Error(error as! Web3Error)))
+                }
             }
         }.eraseToAnyPublisher()
     }

@@ -10,17 +10,52 @@ import Combine
 import SwiftUI
 
 extension Scenes.Login {
-    struct ViewState {
-        var privateKey = ""
-        var password = ""
-        @SwiftUI.State var displayAlert = false
-        var error: Web3Error?
+    enum ViewState {
+        case editing(privateKey: String, password: String)
+        case showingError(Web3Error)
+        case loading
+        
+        var privateKey: String {
+            switch self {
+            case .editing(let privateKey, _):
+                return privateKey
+            default:
+                return ""
+            }
+        }
+        
+        var password: String {
+            switch self {
+            case .editing(_, let password):
+                return password
+            default:
+                return ""
+            }
+        }
+        
+        var isLoading: Bool {
+            switch self {
+            case .loading:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        var error: Web3Error? {
+            switch self {
+            case .showingError(let error):
+                return error
+            default:
+                return nil
+            }
+        }
     }
 }
 
 extension Scenes.Login {
     final class ViewModel: ObservableObject {
-        @Published var viewState = ViewState.init()
+        @Published var viewState = ViewState.editing(privateKey: "", password: "")
         
         let store: Scenes.Login.LoginStore
         private var cancellable: AnyCancellable?
@@ -32,22 +67,35 @@ extension Scenes.Login {
             })
         }
         
-        func send(_ event: Event) {
+        private func send(_ event: Event) {
             store.send(event)
+        }
+        
+        func intentSignIn(credential: URLCredential) {
+            store.send(.intentSignIn(credential: credential))
+        }
+        
+        func intentDismissError() {
+            store.send(.intentDismissError)
         }
         
         private func view(_ output: State) -> ViewState {
             switch output {
             case .start:
-                return .init()
+                return .editing(privateKey: "", password: "")
                 
             case .signInPrompt(withContext: let credentials):
-                return  .init(privateKey: credentials?.user ?? "",
-                              password: credentials?.password ?? "",
-                              error: nil)
+                return .editing(privateKey: credentials?.user ?? "",
+                                password: credentials?.password ?? "")
+                
+            case .signingIn:
+                return .loading
+                
+            case .present(let error):
+                return .showingError(error)
                 
             default:
-                return self.viewState
+                return .editing(privateKey: "", password: "")
             }
         }
     }

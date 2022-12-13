@@ -20,6 +20,7 @@ extension Scenes.TokenSale {
 }
 
 extension Scenes.TokenSale {
+    @MainActor
     final class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         

@@ -10,9 +10,9 @@ import Combine
 
 extension Scenes.Login {
     struct ContentView: View {
-        var initialPrivateKey: String
-        var initialPassword: String
-        let send: (_: Event) -> Void
+        @Binding var viewState: ViewState
+        let intentSignIn: (_ credential: URLCredential) -> Void
+        let intentDismissError: () -> Void
         
         @SwiftUI.State private var username = ""
         @SwiftUI.State private var password = ""
@@ -33,26 +33,25 @@ extension Scenes.Login {
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
                             .onAppear {
-                                username = initialPrivateKey
+                                username = viewState.privateKey
                             }
                         
                         SecureField("Password", text: $password)
                             .focused($focusedField, equals: .password)
                             .textContentType(.password)
                             .onAppear {
-                                password = initialPassword
+                                password = viewState.password
                             }
                     }
                 }
                 Button("Sign-In") {
                     focusedField = nil
-                    send(.intentSignIn(
-                        credential: .init(user: username, password: password, persistence: .none))
-                    )
+                    intentSignIn(URLCredential(user: username,
+                                               password: password,
+                                               persistence: .none))
                 }
-                //                .buttonStyle(.)
                 .padding()
-            }
+            }.loading(viewState.isLoading)
             .navigationBarTitle("Sign-In")
         }
     }
@@ -90,20 +89,21 @@ extension Scenes.Login {
         }
         var body: some View {
             ContentView(
-                initialPrivateKey: viewModel.viewState.privateKey,
-                initialPassword: viewModel.viewState.password,
-                send: viewModel.send(_:))
+                viewState: $viewModel.viewState,
+                intentSignIn: viewModel.intentSignIn,
+                intentDismissError: viewModel.intentDismissError
+            )
         }
     }
 }
 
-struct LoginScene_Previews: PreviewProvider {
-    static var previews: some View {
-        let state: Scenes.Login.ViewState = .init()
-        Scenes.Login.ContentView(
-            initialPrivateKey: state.privateKey,
-            initialPassword: state.password,
-            send: { _ in }
-        )
-    }
-}
+//struct LoginScene_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let state: Scenes.Login.ViewState = .init()
+//        Scenes.Login.ContentView(
+//            initialPrivateKey: state.privateKey,
+//            initialPassword: state.password,
+//            send: { _ in }
+//        )
+//    }
+//}
