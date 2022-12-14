@@ -18,6 +18,24 @@ extension Scenes.Login {
 }
 
 extension Scenes.Login {
+    struct ComponentView: View {
+        typealias ContentView = Scenes.Login.ContentView
+        @StateObject private var viewModel: ViewModel
+        
+        init(store: LoginStore) {
+            _viewModel = StateObject(wrappedValue: ViewModel(store: store))
+        }
+        var body: some View {
+            ContentView(
+                viewState: $viewModel.viewState,
+                intentSignIn: viewModel.intentSignIn,
+                intentDismissError: viewModel.intentDismissError
+            )
+        }
+    }
+}
+
+extension Scenes.Login {
     struct ContentView: View {
         @Binding var viewState: ViewState
         let intentSignIn: (_ credential: URLCredential) -> Void
@@ -69,14 +87,14 @@ extension Scenes.Login {
                 .background(Color.yellow)
                 .foregroundColor(.white)
                 .clipShape(Capsule())
-            }
-            .loading(viewState.isLoading)
-            .alert(viewState.error?.getErrorMessage() ?? "",
-                   isPresented: presentAlert) {
-                Button("OK", role: .cancel) {
-                    intentDismissError()
-                }
             }.navigationBarTitle("Sign-In")
+                .loading(viewState.isLoading)
+                .alert(viewState.error?.getErrorMessage() ?? "",
+                       isPresented: presentAlert) {
+                    Button("OK", role: .cancel) {
+                        intentDismissError()
+                    }
+                }
         }
     }
 }
@@ -100,24 +118,6 @@ struct LoginModifier: ViewModifier {
 extension View {
     func login(isPresented: Binding<Bool>, presenting store: Scenes.Login.LoginStore) -> some View {
         return modifier(LoginModifier(isPresented: isPresented, store: store))
-    }
-}
-
-extension Scenes.Login {
-    struct ComponentView: View {
-        typealias ContentView = Scenes.Login.ContentView
-        @StateObject private var viewModel: ViewModel
-        
-        init(store: LoginStore) {
-            _viewModel = StateObject(wrappedValue: ViewModel(store: store))
-        }
-        var body: some View {
-            ContentView(
-                viewState: $viewModel.viewState,
-                intentSignIn: viewModel.intentSignIn,
-                intentDismissError: viewModel.intentDismissError
-            )
-        }
     }
 }
 

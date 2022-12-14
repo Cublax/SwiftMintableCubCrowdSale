@@ -83,7 +83,7 @@ extension Scenes.Login {
             state = .signInPrompt(credential)
             
         default:
-            break
+            print("*** unhandled: state: \(state), event: \(event)")
         }
         return Empty().eraseToAnyPublisher()
     }

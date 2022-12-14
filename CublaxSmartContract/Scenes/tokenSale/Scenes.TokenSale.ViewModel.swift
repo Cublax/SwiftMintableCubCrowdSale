@@ -10,17 +10,6 @@ import Combine
 import  SwiftUI
 
 extension Scenes.TokenSale {
-    struct ViewState {
-        var accountBalance = ""
-        var totalTokenSupply = ""
-        var tokenBalance = ""
-        @SwiftUI.State var displayAlert = false
-        var errorMessage = ""
-    }
-}
-
-extension Scenes.TokenSale {
-    @MainActor
     final class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         
@@ -34,30 +23,43 @@ extension Scenes.TokenSale {
             })
         }
         
-        func send(_ event: Event) {
+        private func send(_ event: Event) {
             store.send(event)
+        }
+        
+        func intentBuyToken(amount: Int) {
+            store.send(.buyToken(amount: amount))
+        }
+        
+        func intentDismissError(refetch: Bool = false) {
+            store.send(.dismissError(refetch: refetch))
         }
         
         private func view(_ output: State) -> ViewState {
             switch output {
-            case .displayDashboard(accountBalance: let accountBalance, totalTokenSupply: let totalTokenSupply, tokenBalance: let tokenBalance):
-                return .init(
-                    accountBalance: accountBalance,
-                    totalTokenSupply: totalTokenSupply,
-                    tokenBalance: tokenBalance,
-                    displayAlert: false,
-                    errorMessage: "")
+            case .displayDashboard(let accountBalance,
+                                   let totalTokenSupply,
+                                   let tokenBalance):
+                return .init(accountBalance: accountBalance,
+                             totalTokenSupply: totalTokenSupply,
+                             tokenBalance: tokenBalance)
                 
-            case .fetchingValues:
-                return .init()
+            case .fetching(let accountBalance,
+                           let totalTokenSupply,
+                           let tokenBalance):
+                return .init(accountBalance: accountBalance,
+                             totalTokenSupply: totalTokenSupply,
+                             tokenBalance: tokenBalance,
+                             isLoading: true)
                 
-            case .present(let error):
-                return .init(
-                    accountBalance: self.viewState.accountBalance,
-                    totalTokenSupply: self.viewState.totalTokenSupply,
-                    tokenBalance: self.viewState.tokenBalance,
-                    displayAlert: true,
-                    errorMessage: error.getErrorMessage())
+            case .present(let accountBalance,
+                          let totalTokenSupply,
+                          let tokenBalance,
+                          let error):
+                return .init(accountBalance: accountBalance,
+                             totalTokenSupply: totalTokenSupply,
+                             tokenBalance: tokenBalance,
+                             error: error)
             }
         }
     }
