@@ -33,10 +33,6 @@ extension Scenes.Main {
         }
     }
     
-    enum Event {
-        case loginEvent(Scenes.Login.Event)
-    }
-    
     static var appState = State()
     static var world = World()
     
