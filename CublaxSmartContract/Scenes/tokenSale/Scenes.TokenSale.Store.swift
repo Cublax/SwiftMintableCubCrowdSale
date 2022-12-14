@@ -56,8 +56,12 @@ extension Scenes.TokenSale {
     static func buyToken(amount: Int, service: Web3Manager) -> AnyPublisher<Event, Never> {
         Future { promise in
             Task {
-                let buyingStatus = await service.buyCubToken(amount: amount)
-                promise(Result.success(buyingStatus))
+                do {
+                    try await service.buyCubToken(amount: amount)
+                    promise(Result.success(.statusUpdated))
+                } catch {
+                    promise(Result.success(.web3Error(.buyCubToken(error))))
+                }
             }
         }.eraseToAnyPublisher()
     }

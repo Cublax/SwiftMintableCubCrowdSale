@@ -91,7 +91,7 @@ actor Web3Manager {
     }
     
     func getTokenBalance(address: String) async throws -> String {
-        let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
+        let walletAddress = EthereumAddress(wallet.address)! 
         let exploredAddress = EthereumAddress(address)!
         let erc20ContractAddress = EthereumAddress(cublaxToken.address)!
         let contract = web3.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
@@ -164,7 +164,7 @@ actor Web3Manager {
         }
     }
     
-    func buyCubToken(amount: Int) -> Scenes.TokenSale.Event {
+    func buyCubToken(amount: Int) throws {
         let value: String = "\(amount)" // Any amount of Ether you need to send
         let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
         let contractAddress = EthereumAddress(cublaxTokenSaleAddress)!
@@ -188,10 +188,9 @@ actor Web3Manager {
         do {
             let result = try tx.send(password: password)
             print(result)
-            return .statusUpdated
         } catch {
             print("Buy Cub Token failed: \(error)")
-            return .web3Error(.buyCubToken(error))
+            throw error
         }
     }
 }
