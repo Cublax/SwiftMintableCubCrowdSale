@@ -3,7 +3,7 @@
 [web version here](https://cublax.github.io/MintableTokenCrowdSale/)
 
 ### Architecture:
-This DApp is built following The Composable Architecture.
+This DApp is built following an uni-directional Event driven approach utilising a Final State Automaton (FSA).
 
 ### The App:
 A whitelisted account is provided for testing purpose.
