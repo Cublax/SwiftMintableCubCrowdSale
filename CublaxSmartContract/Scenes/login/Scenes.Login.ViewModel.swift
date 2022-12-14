@@ -10,15 +10,6 @@ import Combine
 import SwiftUI
 
 extension Scenes.Login {
-    struct ViewState {
-        var privateKey = ""
-        var password = ""
-        @SwiftUI.State var displayAlert = false
-        var error: Web3Error?
-    }
-}
-
-extension Scenes.Login {
     final class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         
@@ -32,22 +23,43 @@ extension Scenes.Login {
             })
         }
         
-        func send(_ event: Event) {
+        private func send(_ event: Event) {
             store.send(event)
+        }
+        
+        func intentSignIn(credential: URLCredential) {
+            store.send(.intentSignIn(credential: credential))
+        }
+        
+        func intentDismissError() {
+            store.send(.intentDismissError)
         }
         
         private func view(_ output: State) -> ViewState {
             switch output {
             case .start:
-                return .init()
+                return .init(privateKey: "",
+                             password: "")
                 
             case .signInPrompt(withContext: let credentials):
-                return  .init(privateKey: credentials?.user ?? "",
-                              password: credentials?.password ?? "",
-                              error: nil)
+                return .init(privateKey: credentials?.user ?? "",
+                             password: credentials?.password ?? "")
                 
-            default:
-                return self.viewState
+            case .signingIn(let credentials):
+                return .init(privateKey: credentials.user ?? "",
+                             password: credentials.password ?? "",
+                             isLoading: true)
+                
+            case .present(let credentials, let error):
+                return .init(privateKey: credentials.user ?? "",
+                             password: credentials.password ?? "",
+                             error: error)
+                
+            case .readingContext:
+                return .init(isLoading: true)
+                
+            case .signedIn:
+                return .init()
             }
         }
     }

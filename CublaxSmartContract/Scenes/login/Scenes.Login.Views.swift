@@ -9,10 +9,37 @@ import SwiftUI
 import Combine
 
 extension Scenes.Login {
+    struct ViewState {
+        var privateKey = ""
+        var password = ""
+        var error: Web3Error?
+        var isLoading = false
+    }
+}
+
+extension Scenes.Login {
+    struct ComponentView: View {
+        typealias ContentView = Scenes.Login.ContentView
+        @StateObject private var viewModel: ViewModel
+        
+        init(store: LoginStore) {
+            _viewModel = StateObject(wrappedValue: ViewModel(store: store))
+        }
+        var body: some View {
+            ContentView(
+                viewState: $viewModel.viewState,
+                intentSignIn: viewModel.intentSignIn,
+                intentDismissError: viewModel.intentDismissError
+            )
+        }
+    }
+}
+
+extension Scenes.Login {
     struct ContentView: View {
-        var initialPrivateKey: String
-        var initialPassword: String
-        let send: (_: Event) -> Void
+        @Binding var viewState: ViewState
+        let intentSignIn: (_ credential: URLCredential) -> Void
+        let intentDismissError: () -> Void
         
         @SwiftUI.State private var username = ""
         @SwiftUI.State private var password = ""
@@ -23,6 +50,11 @@ extension Scenes.Login {
         @FocusState private var focusedField: Field?
         
         var body: some View {
+            let presentAlert = Binding<Bool>(
+                get: { self.viewState.error != nil },
+                set: { _ in intentDismissError() }
+            )
+            
             VStack {
                 Form {
                     Section(header: Text("Credential")) {
@@ -33,27 +65,36 @@ extension Scenes.Login {
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
                             .onAppear {
-                                username = initialPrivateKey
+                                username = viewState.privateKey
                             }
                         
                         SecureField("Password", text: $password)
                             .focused($focusedField, equals: .password)
                             .textContentType(.password)
                             .onAppear {
-                                password = initialPassword
+                                password = viewState.password
                             }
                     }
                 }
                 Button("Sign-In") {
                     focusedField = nil
-                    send(.intentSignIn(
-                        credential: .init(user: username, password: password, persistence: .none))
-                    )
+                    intentSignIn(URLCredential(user: username,
+                                               password: password,
+                                               persistence: .none))
                 }
-                //                .buttonStyle(.)
                 .padding()
-            }
-            .navigationBarTitle("Sign-In")
+                .font(.title3)
+                .background(Color.yellow)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
+            }.navigationBarTitle("Sign-In")
+                .loading(viewState.isLoading)
+                .alert(viewState.error?.getErrorMessage() ?? "",
+                       isPresented: presentAlert) {
+                    Button("OK", role: .cancel) {
+                        intentDismissError()
+                    }
+                }
         }
     }
 }
@@ -80,30 +121,10 @@ extension View {
     }
 }
 
-extension Scenes.Login {
-    struct ComponentView: View {
-        typealias ContentView = Scenes.Login.ContentView
-        @StateObject private var viewModel: ViewModel
-        
-        init(store: LoginStore) {
-            _viewModel = StateObject(wrappedValue: ViewModel(store: store))
-        }
-        var body: some View {
-            ContentView(
-                initialPrivateKey: viewModel.viewState.privateKey,
-                initialPassword: viewModel.viewState.password,
-                send: viewModel.send(_:))
-        }
-    }
-}
-
 struct LoginScene_Previews: PreviewProvider {
     static var previews: some View {
-        let state: Scenes.Login.ViewState = .init()
-        Scenes.Login.ContentView(
-            initialPrivateKey: state.privateKey,
-            initialPassword: state.password,
-            send: { _ in }
-        )
+        Scenes.Login.ContentView(viewState: .constant(.init()),
+                                 intentSignIn: {_ in },
+                                 intentDismissError: {})
     }
 }

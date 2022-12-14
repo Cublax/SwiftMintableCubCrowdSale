@@ -14,8 +14,8 @@ extension Scenes.TokenSale {
         case epsilon
         
         // Intents, sent from the UI
-        case intentBuyToken(amount: Int)
-        case intentDismissError(oldState: ViewState)
+        case buyToken(amount: Int)
+        case dismissError(refetch: Bool = false)
         
         // Effect Outputs
         case statusUpdated
@@ -25,8 +25,8 @@ extension Scenes.TokenSale {
     
     enum State {
         case displayDashboard(accountBalance: String, totalTokenSupply: String, tokenBalance: String)
-        case fetchingValues
-        case present(Web3Error)
+        case fetching(accountBalance: String, totalTokenSupply: String, tokenBalance: String)
+        case present(accountBalance: String, totalTokenSupply: String, tokenBalance: String, Web3Error)
     }
     
     static func fetchValues(service: Web3Manager) -> AnyPublisher<Event, Never> {
@@ -56,8 +56,12 @@ extension Scenes.TokenSale {
     static func buyToken(amount: Int, service: Web3Manager) -> AnyPublisher<Event, Never> {
         Future { promise in
             Task {
-                let buyingStatus = await service.buyCubToken(amount: amount)
-                promise(Result.success(buyingStatus))
+                do {
+                    try await service.buyCubToken(amount: amount)
+                    promise(Result.success(.statusUpdated))
+                } catch {
+                    promise(Result.success(.web3Error(.buyCubToken(error))))
+                }
             }
         }.eraseToAnyPublisher()
     }
@@ -67,44 +71,59 @@ extension Scenes.TokenSale {
         event: Event,
         environment: World
     ) -> AnyPublisher<Event, Never> {
-        switch event {
-        case .epsilon:
-            state = .displayDashboard(
-                accountBalance: "no data",
-                totalTokenSupply: "no date",
-                tokenBalance: "no data"
-            )
-            
-        case .statusUpdated:
-            state = .fetchingValues
+        switch (state, event) {
+        case (.displayDashboard(let accountBalance,
+                                let totalTokenSupply,
+                                let tokenBalance),
+              .statusUpdated):
+            state = .fetching(accountBalance: accountBalance,
+                              totalTokenSupply: totalTokenSupply,
+                              tokenBalance: tokenBalance)
             return fetchValues(service: environment.service)
             
-        case .receivedValues(
-            accountBalance: let accountBalance,
-            totalTokenSupply: let totalTokenSupply,
-            tokenBalance: let tokenBalance
-        ):
-            state = .displayDashboard(
-                accountBalance: accountBalance,
-                totalTokenSupply: totalTokenSupply,
-                tokenBalance: tokenBalance
-            )
+        case (.fetching, .receivedValues(let accountBalance,
+                                         let totalTokenSupply,
+                                         let tokenBalance)):
+            state = .displayDashboard(accountBalance: accountBalance,
+                                      totalTokenSupply: totalTokenSupply,
+                                      tokenBalance: tokenBalance)
             
-        case .intentBuyToken(let amount):
-            return buyToken(
-                amount: amount,
-                service: environment.service
-            )
+        case (.fetching(let accountBalance,
+                        let totalTokenSupply,
+                        let tokenBalance),
+              .web3Error(let error)):
+            state = .present(accountBalance: accountBalance,
+                             totalTokenSupply: totalTokenSupply,
+                             tokenBalance: tokenBalance,
+                             error)
             
-        case .web3Error(let error):
-            state = .present(error)
+        case (.present(let accountBalance,
+                       let totalTokenSupply,
+                       let tokenBalance, _),
+              .dismissError(let refetch)):
+            if refetch {
+                state = .fetching(accountBalance: accountBalance,
+                                  totalTokenSupply: totalTokenSupply,
+                                  tokenBalance: tokenBalance)
+                return fetchValues(service: environment.service)
+            } else {
+                state = .displayDashboard(accountBalance: "",
+                                          totalTokenSupply: "",
+                                          tokenBalance: "")
+            }
             
-        case .intentDismissError(oldState: let oldState):
-            state = .displayDashboard(
-                accountBalance: oldState.accountBalance,
-                totalTokenSupply: oldState.totalTokenSupply,
-                tokenBalance: oldState.tokenBalance
-            )
+        case (.displayDashboard(let accountBalance,
+                                let totalTokenSupply,
+                                let tokenBalance),
+              .buyToken(let amount)):
+            state = .fetching(accountBalance: accountBalance,
+                              totalTokenSupply: totalTokenSupply,
+                              tokenBalance: tokenBalance)
+            return buyToken(amount: amount,
+                            service: environment.service)
+            
+        default:
+            print("*** unhandled: state: \(state), event: \(event)")
         }
         
         return Empty().eraseToAnyPublisher()

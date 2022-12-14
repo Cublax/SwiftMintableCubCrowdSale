@@ -9,38 +9,12 @@ import SwiftUI
 import Combine
 
 extension Scenes.TokenSale {
-    struct ContentView: View {
-        let viewState: ViewState
-        let send: (_: Event) -> Void
-        
-        @SwiftUI.State private var tokenToBuy = 0
-        
-        var body: some View {
-            VStack(alignment: .leading) {
-                Section {
-                    VStack {
-                        Text("Account Balance(ETH): \(viewState.accountBalance)").bold()
-                        Text("Total Token supply: \(viewState.totalTokenSupply)").bold()
-                        Text("Token balance: \(viewState.tokenBalance)").bold()
-                        Button("Buy \(tokenToBuy) Token") {
-                            send(.intentBuyToken(amount: tokenToBuy))
-                        }
-                        HStack {
-                            Button("+") {
-                                tokenToBuy += 1
-                            }
-                            Button("-") {
-                                tokenToBuy -= (tokenToBuy > 0) ? 1 : 0
-                            }
-                        }
-                    }
-                }
-            }.alert(viewState.errorMessage, isPresented: viewState.$displayAlert) {
-                Button("OK", role: .cancel) {
-                    send(.intentDismissError(oldState: viewState))
-                }
-            }
-        }
+    struct ViewState {
+        var accountBalance = ""
+        var totalTokenSupply = ""
+        var tokenBalance = ""
+        var error: Web3Error?
+        var isLoading = false
     }
 }
 
@@ -54,18 +28,110 @@ extension Scenes.TokenSale {
         }
         
         var body: some View {
-            ContentView(
-                viewState: viewModel.viewState,
-                send: viewModel.send)
+            NavigationView{
+                ContentView(
+                    viewState: $viewModel.viewState,
+                    intentBuyToken: viewModel.intentBuyToken,
+                    intentDismissError: viewModel.intentDismissError
+                )
+            }
+            .navigationViewStyle(.stack)
+        }
+    }
+}
+
+extension Scenes.TokenSale {
+    struct ContentView: View {
+        @Binding var viewState: ViewState
+        let intentBuyToken: (_ amount: Int) -> Void
+        let intentDismissError: (_ refetch: Bool) -> Void
+        
+        @SwiftUI.State private var tokenToBuy = 0
+        
+        var body: some View {
+            let presentAlert = Binding<Bool>(
+                get: { self.viewState.error != nil },
+                set: { _ in  }
+            )
+            
+            VStack {
+                Form {
+                    Section("Current") {
+                        HStack {
+                            Text("Account Balance(ETH):")
+                                .italic()
+                            
+                            Text(viewState.accountBalance)
+                                .bold()
+                        }
+                        
+                        HStack {
+                            Text("Token balance:")
+                                .italic()
+                            
+                            Text(viewState.tokenBalance)
+                                .bold()
+                        }
+                        
+                        HStack {
+                            Text("Total Token supply:")
+                                .italic()
+                            
+                            Text(viewState.totalTokenSupply)
+                                .bold()
+                        }
+                    }
+                }
+                
+                VStack {
+                    Button("Buy \(tokenToBuy) Token") {
+                        intentBuyToken(tokenToBuy)
+                        tokenToBuy = 0
+                    }
+                    .padding()
+                    .font(.title3)
+                    .background(Color.yellow)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+                    
+                    HStack {
+                        Button("+") {
+                            tokenToBuy += 1
+                        }
+                        .padding()
+                        .frame(maxHeight: .infinity)
+                        .background(.green)
+                        
+                        Button("-") {
+                            tokenToBuy -= (tokenToBuy > 0) ? 1 : 0
+                        }
+                        .padding()
+                        .frame(maxHeight: .infinity)
+                        .background(.red)
+                        
+                    }.fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(30)
+            }.navigationBarTitle("Cublax Mintable Token")
+                .loading(viewState.isLoading)
+                .alert(viewState.error?.getErrorMessage() ?? "",
+                       isPresented: presentAlert) {
+                    Button("OK", role: .cancel) {
+                        intentDismissError(false)
+                    }
+                    Button("Refetch", role: .none) {
+                        intentDismissError(true)
+                    }
+                }
         }
     }
 }
 
 struct TokenSaleScene_Previews: PreviewProvider {
     static var previews: some View {
-        let state: Scenes.TokenSale.ViewState = .init()
-        Scenes.TokenSale.ContentView(viewState: state,
-                                     send: { _ in })
+        Scenes.TokenSale.ContentView(viewState: .constant(.init()),
+                                     intentBuyToken: {_ in },
+                                     intentDismissError: {_ in })
     }
 }
 
