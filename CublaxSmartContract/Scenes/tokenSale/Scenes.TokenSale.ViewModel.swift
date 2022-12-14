@@ -10,6 +10,7 @@ import Combine
 import  SwiftUI
 
 extension Scenes.TokenSale {
+    @MainActor
     final class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         

@@ -74,7 +74,7 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		3245A77D28582B98001F8820 /* tokenSale */ = {
+		3245A77D28582B98001F8820 /* TokenSale */ = {
 			isa = PBXGroup;
 			children = (
 				32984AA6285C27E600E4A3DF /* Scenes.TokenSale.swift */,
@@ -82,7 +82,7 @@
 				3245A78028582C6C001F8820 /* Scenes.TokenSale.ViewModel.swift */,
 				3245A77E28582BCB001F8820 /* Scenes.TokenSale.Views.swift */,
 			);
-			path = tokenSale;
+			path = TokenSale;
 			sourceTree = "<group>";
 		};
 		32A1B2FC2857081200FBFA8F /* Model */ = {
@@ -103,7 +103,7 @@
 			path = ABI;
 			sourceTree = "<group>";
 		};
-		32B4D16B2856D259006799D6 /* login */ = {
+		32B4D16B2856D259006799D6 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				32984AA4285C274900E4A3DF /* Scenes.Login.swift */,
@@ -111,7 +111,7 @@
 				32B4D1692856D255006799D6 /* Scenes.Login.ViewModel.swift */,
 				32E8D8F6285053210083D517 /* Scenes.Login.Views.swift */,
 			);
-			path = login;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		32B4D16C2856D33D006799D6 /* web3 */ = {
@@ -175,8 +175,8 @@
 			children = (
 				32984AA2285C26A300E4A3DF /* Scenes.swift */,
 				32286B6228642F1F00712CB5 /* Main */,
-				3245A77D28582B98001F8820 /* tokenSale */,
-				32B4D16B2856D259006799D6 /* login */,
+				3245A77D28582B98001F8820 /* TokenSale */,
+				32B4D16B2856D259006799D6 /* Login */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";

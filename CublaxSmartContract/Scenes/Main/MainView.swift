@@ -36,8 +36,8 @@ extension Scenes.Main {
     static var appState = State()
     static var world = World()
     
-    static let loginReducer = Scenes.Login.loginReducer(state:event:environment:)
-    static let tokenSaleReducer = Scenes.TokenSale.tokenSaleReducer(state:event:environment:)
+    static let loginReducer = Scenes.Login.update(state:event:environment:)
+    static let tokenSaleReducer = Scenes.TokenSale.update(state:event:environment:)
     
     static var loginStore = Scenes.Login.LoginStore(
         initialState: appState.loginState,

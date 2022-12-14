@@ -66,7 +66,7 @@ extension Scenes.TokenSale {
         }.eraseToAnyPublisher()
     }
     
-    static func tokenSaleReducer(
+    static func update(
         state: inout State,
         event: Event,
         environment: World
@@ -121,6 +121,10 @@ extension Scenes.TokenSale {
                               tokenBalance: tokenBalance)
             return buyToken(amount: amount,
                             service: environment.service)
+            
+        case (.fetching,
+              .statusUpdated):
+            return fetchValues(service: environment.service)
             
         default:
             print("*** unhandled: state: \(state), event: \(event)")
