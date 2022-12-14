@@ -9,6 +9,15 @@ import SwiftUI
 import Combine
 
 extension Scenes.Login {
+    struct ViewState {
+        var privateKey = ""
+        var password = ""
+        var error: Web3Error?
+        var isLoading = false
+    }
+}
+
+extension Scenes.Login {
     struct ContentView: View {
         @Binding var viewState: ViewState
         let intentSignIn: (_ credential: URLCredential) -> Void

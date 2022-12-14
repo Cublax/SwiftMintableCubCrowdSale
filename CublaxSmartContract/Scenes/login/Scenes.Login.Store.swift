@@ -27,14 +27,14 @@ extension Scenes.Login {
     enum State {
         case start
         case readingContext
-        case signInPrompt(withContext: URLCredential?)
-        case signingIn
-        case present(Web3Error)
+        case signInPrompt(_ withContext: URLCredential?)
+        case signingIn(_ credential: URLCredential)
+        case present(_ credential: URLCredential, Web3Error)
         case signedIn
     }
     
     static func readContext() -> AnyPublisher<Event, Never> {
-        return Just(Event.start(contextCredential: URLCredential(
+        Just(Event.start(contextCredential: URLCredential(
             user: "12dd3d149cb77bc52df41f0a6f4ae24896b3a166ddfd5092f2f5d13f9f3a0eb1",
             password: "Cublax.74",
             persistence: .none
@@ -60,29 +60,31 @@ extension Scenes.Login {
         event: Event,
         environment: World
     ) -> AnyPublisher<Event, Never> {
-        switch event {
-        case .epsilon:
+        switch (state, event) {
+        case (.start, .epsilon):
             state = .readingContext
             return readContext()
             
-        case .start(let credentials):
-            state = .signInPrompt(withContext: credentials)
+        case (.readingContext, .start(let credential)):
+            state = .signInPrompt(credential)
             
-        case .intentSignIn(credential: let credential):
-            state = .signingIn
+        case (.signInPrompt, .intentSignIn(let credential)):
+            state = .signingIn(credential)
             return signingRequest(service: environment.service,
                                   credential: credential)
             
-        case .signedIn:
+        case (.signingIn, .signedIn):
             state = .signedIn
             
-        case .web3Error(error: let error):
-            state = .present(error)
+        case (.signingIn(let credential), .web3Error(let error)):
+            state = .present(credential, error)
             
-        case .intentDismissError:
-            state = .signInPrompt(withContext: nil)
+        case (.present(let credential, _), .intentDismissError):
+            state = .signInPrompt(credential)
+            
+        default:
+            break
         }
-        
         return Empty().eraseToAnyPublisher()
     }
     

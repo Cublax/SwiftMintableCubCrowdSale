@@ -10,61 +10,8 @@ import Combine
 import SwiftUI
 
 extension Scenes.Login {
-    enum ViewState {
-        case editing(privateKey: String, password: String)
-        case showingError(Web3Error)
-        case loading
-        
-        var privateKey: String {
-            switch self {
-            case .editing(let privateKey, _):
-                return privateKey
-            default:
-                return ""
-            }
-        }
-        
-        var password: String {
-            switch self {
-            case .editing(_, let password):
-                return password
-            default:
-                return ""
-            }
-        }
-        
-        var isLoading: Bool {
-            switch self {
-            case .loading:
-                return true
-            default:
-                return false
-            }
-        }
-        
-        var presentAlert: Bool {
-            switch self {
-            case .showingError(_):
-                return true
-            default:
-                return false
-            }
-        }
-        
-        var error: Web3Error? {
-            switch self {
-            case .showingError(let error):
-                return error
-            default:
-                return nil
-            }
-        }
-    }
-}
-
-extension Scenes.Login {
     final class ViewModel: ObservableObject {
-        @Published var viewState = ViewState.editing(privateKey: "", password: "")
+        @Published var viewState = ViewState.init()
         
         let store: Scenes.Login.LoginStore
         private var cancellable: AnyCancellable?
@@ -91,20 +38,28 @@ extension Scenes.Login {
         private func view(_ output: State) -> ViewState {
             switch output {
             case .start:
-                return .editing(privateKey: "", password: "")
+                return .init(privateKey: "",
+                             password: "")
                 
             case .signInPrompt(withContext: let credentials):
-                return .editing(privateKey: credentials?.user ?? "",
-                                password: credentials?.password ?? "")
+                return .init(privateKey: credentials?.user ?? "",
+                             password: credentials?.password ?? "")
                 
-            case .signingIn:
-                return .loading
+            case .signingIn(let credentials):
+                return .init(privateKey: credentials.user ?? "",
+                             password: credentials.password ?? "",
+                             isLoading: true)
                 
-            case .present(let error):
-                return .showingError(error)
+            case .present(let credentials, let error):
+                return .init(privateKey: credentials.user ?? "",
+                             password: credentials.password ?? "",
+                             error: error)
                 
-            default:
-                return .editing(privateKey: "", password: "")
+            case .readingContext:
+                return .init(isLoading: true)
+                
+            case .signedIn:
+                return .init()
             }
         }
     }
