@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 
 extension Scenes.Login {
+    @MainActor
     final class ViewModel: ObservableObject {
         @Published var viewState = ViewState.init()
         
@@ -27,11 +28,11 @@ extension Scenes.Login {
             store.send(event)
         }
         
-        func intentSignIn(credential: URLCredential) {
+        nonisolated func intentSignIn(credential: URLCredential) {
             store.send(.intentSignIn(credential: credential))
         }
         
-        func intentDismissError() {
+        nonisolated func intentDismissError() {
             store.send(.intentDismissError)
         }
         

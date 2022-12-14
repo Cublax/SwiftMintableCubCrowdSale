@@ -28,11 +28,11 @@ extension Scenes.TokenSale {
             store.send(event)
         }
         
-        func intentBuyToken(amount: Int) {
+        nonisolated func intentBuyToken(amount: Int) {
             store.send(.buyToken(amount: amount))
         }
         
-        func intentDismissError(refetch: Bool = false) {
+        nonisolated func intentDismissError(refetch: Bool = false) {
             store.send(.dismissError(refetch: refetch))
         }
         

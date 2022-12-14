@@ -8,16 +8,14 @@
 import Foundation
 import Combine
 
-typealias Reducer<State, Action, Environment> =
-    (inout State, Action, Environment) -> AnyPublisher<Action, Never>?
-
-final class Store<State, Action, Environment>: ObservableObject {
+final class Store<State, Action: Sendable, Environment>: ObservableObject {
     @Published private(set) var state: State
-
+    
     private let environment: Environment
     private let reducer: Reducer<State, Action, Environment>
-    private var effectCancellables: Set<AnyCancellable> = []
-
+    private var cancellable: AnyCancellable!
+    private let input = PassthroughSubject<Action, Never>()
+    
     init(
         initialState: State,
         reducer: @escaping Reducer<State, Action, Environment>,
@@ -26,16 +24,18 @@ final class Store<State, Action, Environment>: ObservableObject {
         self.state = initialState
         self.reducer = reducer
         self.environment = environment
-    }
-
-    func send(_ action: Action) {
-        guard let effect = reducer(&state, action, environment) else {
-            return
-        }
-
-        effect
+        self.cancellable = self.input
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: send)
-            .store(in: &effectCancellables)
+            .compactMap { action in
+                reducer(&self.state, action, environment)
+            }
+            .flatMap { $0 }
+            .sink { action in
+                self.input.send(action)
+            }
+    }
+    
+    func send(_ action: Action) {
+        input.send(action)
     }
 }
