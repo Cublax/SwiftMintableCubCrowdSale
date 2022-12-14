@@ -9,42 +9,6 @@ import SwiftUI
 import Combine
 
 extension Scenes.TokenSale {
-    struct ContentView: View {
-        let viewState: ViewState
-        let send: (_: Event) -> Void
-        
-        @SwiftUI.State private var tokenToBuy = 0
-        
-        var body: some View {
-            VStack(alignment: .leading) {
-                Section {
-                    VStack {
-                        Text("Account Balance(ETH): \(viewState.accountBalance)").bold()
-                        Text("Total Token supply: \(viewState.totalTokenSupply)").bold()
-                        Text("Token balance: \(viewState.tokenBalance)").bold()
-                        Button("Buy \(tokenToBuy) Token") {
-                            send(.intentBuyToken(amount: tokenToBuy))
-                        }
-                        HStack {
-                            Button("+") {
-                                tokenToBuy += 1
-                            }
-                            Button("-") {
-                                tokenToBuy -= (tokenToBuy > 0) ? 1 : 0
-                            }
-                        }
-                    }
-                }
-            }.alert(viewState.errorMessage, isPresented: viewState.$displayAlert) {
-                Button("OK", role: .cancel) {
-                    send(.intentDismissError(oldState: viewState))
-                }
-            }
-        }
-    }
-}
-
-extension Scenes.TokenSale {
     struct ComponentView: View {
         typealias ContentView = Scenes.TokenSale.ContentView
         @StateObject private var viewModel: ViewModel
@@ -54,9 +18,89 @@ extension Scenes.TokenSale {
         }
         
         var body: some View {
-            ContentView(
-                viewState: viewModel.viewState,
-                send: viewModel.send)
+            NavigationView{
+                ContentView(
+                    viewState: viewModel.viewState,
+                    send: viewModel.send)
+            }
+            .navigationViewStyle(.stack)
+        }
+    }
+}
+
+extension Scenes.TokenSale {
+    struct ContentView: View {
+        let viewState: ViewState
+        let send: (_: Event) -> Void
+        
+        @SwiftUI.State private var tokenToBuy = 0
+        
+        var body: some View {
+            VStack {
+                Form {
+                    Section("Current") {
+                        HStack {
+                            Text("Account Balance(ETH):")
+                                .italic()
+                            
+                            Text(viewState.accountBalance)
+                                .bold()
+                        }
+                        
+                        HStack {
+                            Text("Total Token supply:")
+                                .italic()
+                            
+                            Text(viewState.totalTokenSupply)
+                                .bold()
+                        }
+                        
+                        HStack {
+                            Text("Token balance:")
+                                .italic()
+                            
+                            Text(viewState.tokenBalance)
+                                .bold()
+                        }
+                    }
+                }
+                
+                VStack {
+                    Button("Buy \(tokenToBuy) Token") {
+                        send(.intentBuyToken(amount: tokenToBuy))
+                        tokenToBuy = 0
+                    }
+                    .padding()
+                    .font(.title3)
+                    .background(Color.yellow)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+                    
+                    HStack {
+                        Button("+") {
+                            tokenToBuy += 1
+                        }
+                        .padding()
+                        .frame(maxHeight: .infinity)
+                        .background(.green)
+                        
+                        Button("-") {
+                            tokenToBuy -= (tokenToBuy > 0) ? 1 : 0
+                        }
+                        .padding()
+                        .frame(maxHeight: .infinity)
+                        .background(.red)
+                        
+                    }.fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(30)
+            }.navigationBarTitle("Cublax Mintable Token")
+            
+                .alert(viewState.errorMessage, isPresented: viewState.$displayAlert) {
+                    Button("OK", role: .cancel) {
+                        send(.intentDismissError(oldState: viewState))
+                    }
+                }
         }
     }
 }

@@ -65,6 +65,10 @@ extension Scenes.Login {
                                                persistence: .none))
                 }
                 .padding()
+                .font(.title3)
+                .background(Color.yellow)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
             }
             .loading(viewState.isLoading)
             .alert(viewState.error?.getErrorMessage() ?? "",
@@ -72,8 +76,7 @@ extension Scenes.Login {
                 Button("OK", role: .cancel) {
                     intentDismissError()
                 }
-            }
-                   .navigationBarTitle("Sign-In")
+            }.navigationBarTitle("Sign-In")
         }
     }
 }
