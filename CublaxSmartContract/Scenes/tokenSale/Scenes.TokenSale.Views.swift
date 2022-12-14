@@ -66,18 +66,18 @@ extension Scenes.TokenSale {
                         }
                         
                         HStack {
-                            Text("Total Token supply:")
-                                .italic()
-                            
-                            Text(viewState.totalTokenSupply)
-                                .bold()
-                        }
-                        
-                        HStack {
                             Text("Token balance:")
                                 .italic()
                             
                             Text(viewState.tokenBalance)
+                                .bold()
+                        }
+                        
+                        HStack {
+                            Text("Total Token supply:")
+                                .italic()
+                            
+                            Text(viewState.totalTokenSupply)
                                 .bold()
                         }
                     }
