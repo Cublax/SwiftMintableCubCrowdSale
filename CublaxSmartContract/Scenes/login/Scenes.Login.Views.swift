@@ -73,7 +73,7 @@ extension Scenes.Login {
                     intentDismissError()
                 }
             }
-            .navigationBarTitle("Sign-In")
+                   .navigationBarTitle("Sign-In")
         }
     }
 }
@@ -118,13 +118,10 @@ extension Scenes.Login {
     }
 }
 
-//struct LoginScene_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let state: Scenes.Login.ViewState = .init()
-//        Scenes.Login.ContentView(
-//            initialPrivateKey: state.privateKey,
-//            initialPassword: state.password,
-//            send: { _ in }
-//        )
-//    }
-//}
+struct LoginScene_Previews: PreviewProvider {
+    static var previews: some View {
+        Scenes.Login.ContentView(viewState: .constant(.init()),
+                                 intentSignIn: {_ in },
+                                 intentDismissError: {})
+    }
+}
