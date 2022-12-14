@@ -55,7 +55,7 @@ extension Scenes.Login {
         }.eraseToAnyPublisher()
     }
     
-    static func loginReducer(
+    static func update(
         state: inout State,
         event: Event,
         environment: World
